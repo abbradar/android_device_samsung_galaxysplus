@@ -26,8 +26,13 @@ PRODUCT_COPY_FILES += \
 
 # Custom init
 PRODUCT_COPY_FILES += \
-    device/samsung/galaxysplus/init.galaxysplus.rc:root/init.galaxysplus.rc \
+    device/samsung/galaxysplus/init.target.rc:root/init.target.rc \
     device/samsung/galaxysplus/ueventd.galaxysplus.rc:root/ueventd.galaxysplus.rc
+
+# These are the hardware-specific configuration files
+PRODUCT_COPY_FILES := \
+	device/samsung/galaxysplus/vold.fstab:system/etc/vold.fstab \
+	device/samsung/galaxysplus/egl.cfg:system/lib/egl/egl.cfg
 
 $(call inherit-product, build/target/product/full.mk)
 

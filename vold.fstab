@@ -21,7 +21,7 @@
 }
 dev_mount sdcard /mnt/sdcard 28 /devices/platform/msm_sdcc.2/mmc_host/mmc1
 
-# externel sdcard
+# external sdcard
 {
 	ums_path = /sys/devices/platform/usb_mass_storage/lun1/file
 	asec = enable

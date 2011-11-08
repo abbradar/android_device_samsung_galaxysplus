@@ -96,6 +96,8 @@ BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 
 # Partitions
+BOARD_HAS_SDCARD_INTERNAL := true
+BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_BOOT_DEVICE := /dev/block/mmcblk0p8
 BOARD_DATA_DEVICE := /dev/block/mmcblk0p17
 BOARD_DATA_FILESYSTEM := ext4
@@ -105,6 +107,9 @@ BOARD_CACHE_DEVICE := /dev/block/mmcblk0p16
 BOARD_CACHE_FILESYSTEM := ext4
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_RECOVERY_DEVICE := /dev/block/mmcblk0p13
+BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/mmcblk0p28
+BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
+BOARD_UMS_LUNFILE := /sys/devices/platform/usb_mass_storage/lun0/file
 
 # Video
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200

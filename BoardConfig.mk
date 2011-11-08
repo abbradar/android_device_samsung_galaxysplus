@@ -118,5 +118,5 @@ BOARD_USES_QCOM_LIBS := true
 BOARD_EGL_CFG := device/samsung/galaxysplus/egl.cfg
 
 # assert
-TARGET_OTA_ASSERT_DEVICE := galaxysplus,GT-I9001
+TARGET_OTA_ASSERT_DEVICE := GalaxySPlus,GT-I9001
 

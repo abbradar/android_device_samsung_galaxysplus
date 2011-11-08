@@ -1,17 +1,14 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-# The gps config appropriate for this device
-$(call inherit-product, device/common/gps/gps_us_supl.mk)
-
 $(call inherit-product-if-exists, vendor/samsung/galaxysplus/galaxysplus-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/samsung/galaxysplus/overlay
 
-
+# Kernel
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := device/samsung/galaxysplus/kernel
+    LOCAL_KERNEL := device/samsung/galaxysplus/kernel
 else
-	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+    LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
 
 PRODUCT_COPY_FILES += \
@@ -26,13 +23,17 @@ PRODUCT_COPY_FILES += \
 
 # Custom init
 PRODUCT_COPY_FILES += \
-    device/samsung/galaxysplus/init.target.rc:root/init.target.rc \
+    device/samsung/galaxysplus/init.galaxysplus.rc:root/init.galaxysplus.rc \
     device/samsung/galaxysplus/ueventd.galaxysplus.rc:root/ueventd.galaxysplus.rc
 
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES := \
 	device/samsung/galaxysplus/vold.fstab:system/etc/vold.fstab \
 	device/samsung/galaxysplus/egl.cfg:system/lib/egl/egl.cfg
+
+# Some kernel modules
+PRODUCT_COPY_FILES := \
+	device/samsung/galaxysplus/modules/tun.ko:system/lib/modules/tun.ko
 
 $(call inherit-product, build/target/product/full.mk)
 
@@ -43,5 +44,4 @@ PRODUCT_MODEL := GT-I9001
 PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := samsung
 
-PRODUCT_LOCALES += mdpi
-
+PRODUCT_LOCALES := hdpi

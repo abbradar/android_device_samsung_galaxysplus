@@ -34,24 +34,27 @@ BOARD_HAS_DOWNLOAD_MODE := true
 TARGET_PROVIDES_INIT := true
 TARGET_PROVIDES_INIT_TARGET_RC := true
 TARGET_BOARD_PLATFORM := msm7k
-TARGET_BOOTLOADER_BOARD_NAME := GT-I9001
-#TARGET_RECOVERY_INITRC := device/samsung/galaxysplus/recovery.rc
+TARGET_BOOTLOADER_BOARD_NAME := GalaxySPlus
 
 BOARD_MOBILEDATA_INTERFACE_NAME = "pdp0"
+
+# Camera
+USE_CAMERA_STUB := false
+ifeq ($(USE_CAMERA_STUB),false)
+BOARD_CAMERA_LIBRARIES := libcamera
+endif
 
 # Video Devices
 BOARD_USES_OVERLAY := true
 BOARD_V4L2_DEVICE := /dev/video1
 BOARD_CAMERA_DEVICE := /dev/video0
-BOARD_SECOND_CAMERA_DEVICE := /dev/video2
+BOARD_SECOND_CAMERA_DEVICE := /dev/video
+BOARD_USES_QCOM_LIBRPC := true
+#BOARD_USES_QCOM_GPS := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
-BT_ALT_STACK := true
-BRCM_BT_USE_BTL_IF := true
-BRCM_BTL_INCLUDE_A2DP := true
-#BOARD_USES_ALSA_AUDIO := true
 
 # gps
 BOARD_USES_GPSWRAPPER := true
@@ -61,14 +64,15 @@ BOARD_HAVE_FM_RADIO := true
 BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 BOARD_FM_DEVICE := si4709
 
+# Kernel
 BOARD_NAND_PAGE_SIZE := 4096 -s 128
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_BASE := 0x00400000
 BOARD_KERNEL_CMDLINE := console=ttySAC2,115200 consoleblank=0
 TARGET_PREBUILT_KERNEL := device/samsung/galaxysplus/kernel
 
-// Partition sizes
-// TODO: recheck
+# Partition sizes
+# TODO: recheck
 BOARD_BOOTIMAGE_PARTITION_SIZE := 7864320
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 7864320
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 471859200
@@ -76,14 +80,14 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 274464768
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Connectivity - Wi-Fi
-WPA_SUPPLICANT_VERSION := VER_0_6_X
+#WPA_SUPPLICANT_VERSION := VER_0_6_X
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 BOARD_WLAN_DEVICE := bcm4329
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/bcm4329.ko"
-WIFI_DRIVER_FW_STA_PATH     := "/vendor/firmware/fw_bcm4329.bin"
-WIFI_DRIVER_FW_AP_PATH      := "/vendor/firmware/fw_bcm4329_apsta.bin"
+WIFI_DRIVER_FW_STA_PATH     := "/system/lib/firmware/fw_bcm4329.bin"
+WIFI_DRIVER_FW_AP_PATH      := "/system/lib/firmware/fw_bcm4329_apsta.bin"
 WIFI_DRIVER_MODULE_NAME     :=  "bcm4329"
-WIFI_DRIVER_MODULE_ARG      :=  "firmware_path=/vendor/firmware/fw_bcm4329.bin nvram_path=/vendor/firmware/nvram_net.txt"
+WIFI_DRIVER_MODULE_ARG      :=  "firmware_path=/system/lib/firmware/fw_bcm4329.bin nvram_path=/system/lib/firmware/nvram_net.txt"
 
 # Vold
 BOARD_VOLD_MAX_PARTITIONS := 12
@@ -116,7 +120,7 @@ BOARD_UMS_LUNFILE := /sys/devices/platform/usb_mass_storage/lun0/file
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_LIBS := true
-BOARD_EGL_CFG := device/samsung/galaxysplus/egl.cfg
+BOARD_EGL_CFG := device/samsung/galaxysplus/etc/egl.cfg
 
 # assert
 TARGET_OTA_ASSERT_DEVICE := GalaxySPlus,GT-I9001

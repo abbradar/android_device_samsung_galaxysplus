@@ -35,14 +35,15 @@ done
 
 FILES=(
 # gps
+lib/hw/gps.msm7k.so
 #etc/gps.conf
 #bin/gpsd
 
 # radio
-#bin/rild
+bin/rild
 #lib/libril.so
 #lib/libsecril-client.so
-#lib/libsec-ril.so
+lib/libsec-ril.so
 #lib/modules/libra.ko
 #lib/modules/librasdioif.ko
 #lib/modules/WCN1314_rf.ko
@@ -56,10 +57,10 @@ FILES=(
 etc/wifi/nvram_net.txt
 
 #video
-lib/libgsl.so
-lib/libgsdi_exp.so
-lib/libgstk_exp.so
-lib/egl/libGLES_android.so
+#lib/libgsl.so
+#lib/libgsdi_exp.so
+#lib/libgstk_exp.so
+#lib/egl/libGLES_android.so
 lib/egl/libEGL_adreno200.so
 lib/egl/libGLESv1_CM_adreno200.so
 lib/egl/libGLESv2_adreno200.so
@@ -67,39 +68,38 @@ lib/egl/libq3dtools_adreno200.so
 
 # audio
 #lib/libaudioalsa.so
-lib/libaudioeq.so
+#lib/libaudioeq.so
 lib/libgemini.so
 
-# camera
-lib/libmmipl.so
-lib/libmmjpeg.so
-
 # sensors
-lib/libsensor_yamaha_test.so
-lib/libsensorservice.so
-bin/orientationd
-bin/geomagneticd
+#lib/libsensor_yamaha_test.so
+#lib/libsensorservice.so
+#bin/orientationd
+#bin/geomagneticd
+lib/hw/sensors.GT-I9001.so
+lib/hw/sensors.default.so
 
 # generic qcom libs
-lib/libping_mdm.so
-lib/liboncrpc.so
-lib/libdsm.so
-lib/libqueue.so
-lib/libdiag.so
-lib/libauth.so
-lib/libcm.so
-lib/libmmgsdilib.so
-lib/libnv.so
-lib/libpbmlib.so
-lib/libpdsm_atl.so
-lib/libwms.so
-lib/libpdapi.so
-lib/liboem_rapi.so
-lib/libqmi.so
-lib/libqmiservices.so
-lib/libidl.so
-lib/libdsutils.so
-lib/libnetmgr.so
+lib/hw/overlay.default.so
+#lib/libping_mdm.so
+#lib/liboncrpc.so
+#lib/libdsm.so
+#lib/libqueue.so
+#lib/libdiag.so
+#lib/libauth.so
+#lib/libcm.so
+#lib/libmmgsdilib.so
+#lib/libnv.so
+#lib/libpbmlib.so
+#lib/libpdsm_atl.so
+#lib/libwms.so
+#lib/libpdapi.so
+#lib/liboem_rapi.so
+#lib/libqmi.so
+#lib/libqmiservices.so
+#lib/libidl.so
+#lib/libdsutils.so
+#lib/libnetmgr.so
 
 ## camera
 #lib/libActionShot.so
@@ -114,6 +114,9 @@ lib/libnetmgr.so
 #lib/libs3cjpeg.so
 #lib/libseccamera.so
 #lib/libcamera.so
+lib/liboemcamera.so
+lib/libmmipl.so
+lib/libmmjpeg.so
 #lib/libseccameraadaptor.so
 #lib/libsecjpegencoder.so
 #cameradata/datapattern_420sp.yuv

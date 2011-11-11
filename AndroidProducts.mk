@@ -1,3 +1,3 @@
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/device_galaxysplus.mk
+    $(LOCAL_DIR)/full_galaxysplus.mk
 

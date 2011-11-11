@@ -40,24 +40,34 @@ BOARD_MOBILEDATA_INTERFACE_NAME = "pdp0"
 
 # Camera
 USE_CAMERA_STUB := false
+BOARD_USE_CAF_LIBCAMERA := true
 ifeq ($(USE_CAMERA_STUB),false)
 BOARD_CAMERA_LIBRARIES := libcamera
 endif
 
 # Video Devices
 BOARD_USES_OVERLAY := true
-BOARD_V4L2_DEVICE := /dev/video1
-BOARD_CAMERA_DEVICE := /dev/video0
-BOARD_SECOND_CAMERA_DEVICE := /dev/video
+BOARD_V4L2_DEVICE := /dev/video20
+#BOARD_CAMERA_DEVICE := /dev/video0
+#BOARD_SECOND_CAMERA_DEVICE := /dev/video
+
+# Qcom
 BOARD_USES_QCOM_LIBRPC := true
-BOARD_USES_QCOM_GPS := true
+BOARD_USES_QCOM_HARDWARE := true
+BOARD_USES_QCOM_LIBS := true
+TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
+
+# Misc
+JS_ENGINE := v8
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 
 # gps
-BOARD_USES_GPSWRAPPER := true
+BOARD_USES_QCOM_GPS := true
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := qcom
+#BOARD_USES_GPSWRAPPER := true
 
 # FM Radio
 BOARD_HAVE_FM_RADIO := true
@@ -83,11 +93,11 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 #WPA_SUPPLICANT_VERSION := VER_0_6_X
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 BOARD_WLAN_DEVICE := bcm4329
-WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/bcm4329.ko"
-WIFI_DRIVER_FW_STA_PATH     := "/system/lib/firmware/fw_bcm4329.bin"
-WIFI_DRIVER_FW_AP_PATH      := "/system/lib/firmware/fw_bcm4329_apsta.bin"
-WIFI_DRIVER_MODULE_NAME     :=  "bcm4329"
-WIFI_DRIVER_MODULE_ARG      :=  "firmware_path=/system/lib/firmware/fw_bcm4329.bin nvram_path=/system/lib/firmware/nvram_net.txt"
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/bcm4329.ko"
+WIFI_DRIVER_FW_STA_PATH := "/system/lib/firmware/fw_bcm4329.bin"
+WIFI_DRIVER_FW_AP_PATH := "/system/lib/firmware/fw_bcm4329_apsta.bin"
+WIFI_DRIVER_MODULE_NAME :=  "bcm4329"
+WIFI_DRIVER_MODULE_ARG  :=  "firmware_path=/system/lib/firmware/fw_bcm4329.bin nvram_path=/system/lib/firmware/nvram_net.txt"
 
 # Vold
 BOARD_VOLD_MAX_PARTITIONS := 12
@@ -118,9 +128,8 @@ BOARD_UMS_LUNFILE := /sys/devices/platform/usb_mass_storage/lun0/file
 
 # Video
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
-BOARD_USES_QCOM_HARDWARE := true
-BOARD_USES_QCOM_LIBS := true
 BOARD_EGL_CFG := device/samsung/galaxysplus/etc/egl.cfg
 
 # assert
 TARGET_OTA_ASSERT_DEVICE := GT-I9001
+

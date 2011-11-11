@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Copyright (C) 2010 The Android Open Source Project
 #
@@ -35,7 +35,7 @@ mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE
 # limitations under the License.
 
 # Live wallpaper packages and Themes
-PRODUCT_PACKAGES := \\
+PRODUCT_PACKAGES += \\
     LiveWallpapers \\
     LiveWallpapersPicker \\
     MagicSmokeWallpapers \\
@@ -43,11 +43,11 @@ PRODUCT_PACKAGES := \\
     librs_jni
 
 # Publish that we support the live wallpaper feature.
-PRODUCT_COPY_FILES := \\
+PRODUCT_COPY_FILES += \\
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml
 
 # Pick up overlay for features that depend on non-open-source files
-DEVICE_PACKAGE_OVERLAYS := vendor/__MANUFACTURER__/__DEVICE__/overlay
+DEVICE_PACKAGE_OVERLAYS += vendor/__MANUFACTURER__/__DEVICE__/overlay
 
 \$(call inherit-product, vendor/__MANUFACTURER__/__DEVICE__/__DEVICE__-vendor-blobs.mk)
 EOF
@@ -68,13 +68,13 @@ EOF
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-BOARD_GPS_LIBRARIES := libgps
+#BOARD_GPS_LIBRARIES := libgps
 
-USE_CAMERA_STUB := false
+#USE_CAMERA_STUB := false
 
-BOARD_USES_GENERIC_AUDIO := false
+#BOARD_USES_GENERIC_AUDIO := false
 
-BOARD_USES_LIBSECRIL_STUB := false
+#BOARD_USES_LIBSECRIL_STUB := false
 
 #BOARD_NO_PAGE_FLIPPING := false
 #BOARD_NO_32BPP := false

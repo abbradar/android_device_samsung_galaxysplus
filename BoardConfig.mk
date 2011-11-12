@@ -42,7 +42,7 @@ BOARD_MOBILEDATA_INTERFACE_NAME = "pdp0"
 
 # Camera
 USE_CAMERA_STUB := false
-BOARD_CAMERA_LIBRARIES := libcamera.msm7k
+BOARD_CAMERA_LIBRARIES := libcamera
 
 # Video Devices
 BOARD_V4L2_DEVICE := /dev/video20

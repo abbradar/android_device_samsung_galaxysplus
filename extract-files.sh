@@ -80,7 +80,6 @@ lib/hw/sensors.GT-I9001.so
 lib/hw/sensors.default.so
 
 # generic qcom libs
-lib/hw/overlay.default.so
 #lib/libping_mdm.so
 #lib/liboncrpc.so
 #lib/libdsm.so

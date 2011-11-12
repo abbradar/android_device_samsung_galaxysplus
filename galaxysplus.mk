@@ -59,9 +59,11 @@ PRODUCT_COPY_FILES += \
     hardware/broadcom/wlan/bcm4329/firmware/fw_bcm4329_apsta.bin:system/lib/firmware/fw_bcm4329_apsta.bin
 
 # Libraries
-PRODUCT_PACKAGES := \
-    liblights.msm7k \
-    libgralloc.msm7k
+PRODUCT_PACKAGES += \
+    lights.msm7k \
+    gralloc.msm7k \
+    overlay.default \
+    libcamera
 
 # apns config file
 PRODUCT_COPY_FILES += \

@@ -17,9 +17,6 @@
 # Product-specific compile-time definitions.
 #
 
-# Use the non-open-source parts, if they're present
--include vendor/samsung/galaxysplus/BoardConfigVendor.mk
-
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
@@ -41,7 +38,7 @@ BOARD_USES_OVERLAY := true
 BOARD_MOBILEDATA_INTERFACE_NAME = "pdp0"
 
 # Camera
-USE_CAMERA_STUB := false
+USE_CAMERA_STUB := true
 BOARD_CAMERA_LIBRARIES := libcamera
 
 # Video Devices
@@ -57,6 +54,7 @@ TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 
 # Misc
 JS_ENGINE := v8
+BOARD_USES_LIBSECRIL_STUB := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -132,3 +130,5 @@ BOARD_EGL_CFG := device/samsung/galaxysplus/etc/egl.cfg
 # assert
 TARGET_OTA_ASSERT_DEVICE := GT-I9001
 
+# Use the non-open-source parts, if they're present
+-include vendor/samsung/galaxysplus/BoardConfigVendor.mk

@@ -53,25 +53,25 @@ PRODUCT_COPY_FILES += \
     device/samsung/galaxysplus/splash/ARIESVE.rle:recovery/ARIESVE.rle \
     device/samsung/galaxysplus/splash/charging.rle:recovery/charging.rle
 
-# Firmware
+# Wi-Fi
 PRODUCT_COPY_FILES += \
-    hardware/broadcom/wlan/bcm4329/firmware/fw_bcm4329.bin:system/lib/firmware/fw_bcm4329.bin \
-    hardware/broadcom/wlan/bcm4329/firmware/fw_bcm4329_apsta.bin:system/lib/firmware/fw_bcm4329_apsta.bin
+    device/samsung/galaxysplus/modules/dhd.ko:system/lib/modules/dhd.ko \
+    device/samsung/galaxysplus/etc/nvram_net.txt:system/lib/firmware/nvram_net.txt
+
+PRODUCT_PACKAGES += \
+    fw_bcm4329.bin \
+    fw_bcm4329_apsta.bin
 
 # Libraries
 PRODUCT_PACKAGES += \
-    lights.msm7k \
-    gralloc.msm7k \
+    lights.msm7x30 \
+    #gralloc.msm7x30 \
     overlay.default \
-    libcamera
-
-# apns config file
-PRODUCT_COPY_FILES += \
-        vendor/cyanogen/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
-
-## Bluetooth MAC Address
-#PRODUCT_PACKAGES += \
-#	bdaddr_read
+    libcamera \
+    librs_jni \
+    libOmxCore \
+    libOmxVenc \
+    libOmxVdec
 
 # Init files
 PRODUCT_COPY_FILES += \
@@ -124,7 +124,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES += \
 	device/samsung/galaxysplus/etc/vold.fstab:system/etc/vold.fstab \
-#	device/samsung/galaxysplus/etc/egl.cfg:system/lib/egl/egl.cfg \
+	device/samsung/galaxysplus/etc/gps.conf:system/etc/gps.conf \
 	device/samsung/galaxysplus/etc/asound.conf:system/etc/asound.conf
 
 # Some kernel modules

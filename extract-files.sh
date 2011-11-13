@@ -54,21 +54,21 @@ lib/libsec-ril.so
 #etc/wifi/bcm4329_mfg.bin
 #etc/wifi/bcm4329_sta.bin
 #etc/wifi/dhd.ko
-etc/wifi/nvram_net.txt
+#etc/wifi/nvram_net.txt
 
 #video
-#lib/libgsl.so
+lib/libgsl.so
 #lib/libgsdi_exp.so
 #lib/libgstk_exp.so
-#lib/egl/libGLES_android.so
+lib/hw/gralloc.msm7k.so
 lib/egl/libEGL_adreno200.so
 lib/egl/libGLESv1_CM_adreno200.so
 lib/egl/libGLESv2_adreno200.so
 lib/egl/libq3dtools_adreno200.so
 
 # audio
-#lib/libaudioalsa.so
-#lib/libaudioeq.so
+lib/libaudioalsa.so
+lib/libaudioeq.so
 lib/libgemini.so
 
 # sensors
@@ -162,12 +162,20 @@ media/chargingwarning.qmg
 media/Disconnected.qmg
 )
 
+OBJECTS=(
+lib/libaudioalsa.so
+)
+
+chmod -R a+x ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin/*
+
 for i in ${FILES[@]}; do
     echo $i
     adb pull system/$i ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/$i #2> /dev/null
 done
 
-(cat << EOF) > ../../../vendor/$MANUFACTURER/$DEVICE/$DEVICE-vendor-blobs.mk
+vendor_blobs=../../../vendor/$MANUFACTURER/$DEVICE/$DEVICE-vendor-blobs.mk
+
+(cat << EOF) > $vendor_blobs
 # Copyright (C) 2010 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -185,8 +193,12 @@ done
 PRODUCT_COPY_FILES += \\
 EOF
 
+for i in ${OBJECTS[@]}; do
+    echo "vendor/$MANUFACTURER/$DEVICE/proprietary/$i:obj/$i \\" >> $vendor_blobs
+done
+
 for i in ${FILES[@]}; do
-    echo "vendor/$MANUFACTURER/$DEVICE/proprietary/$i:system/$i \\" >> ../../../vendor/$MANUFACTURER/$DEVICE/$DEVICE-vendor-blobs.mk
+    echo "vendor/$MANUFACTURER/$DEVICE/proprietary/$i:system/$i \\" >> $vendor_blobs
 done
 
 ./setup-makefiles.sh

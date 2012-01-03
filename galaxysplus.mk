@@ -53,14 +53,23 @@ PRODUCT_COPY_FILES += \
     device/samsung/galaxysplus/splash/ARIESVE.rle:recovery/ARIESVE.rle \
     device/samsung/galaxysplus/splash/charging.rle:recovery/charging.rle
 
-# Wi-Fi
-PRODUCT_COPY_FILES += \
-    device/samsung/galaxysplus/modules/dhd.ko:system/lib/modules/dhd.ko \
-    device/samsung/galaxysplus/etc/nvram_net.txt:system/lib/firmware/nvram_net.txt
-
 PRODUCT_PACKAGES += \
     fw_bcm4329.bin \
     fw_bcm4329_apsta.bin
+    
+# These are the hardware-specific configuration files
+PRODUCT_COPY_FILES += \
+#  device/samsung/galaxysplus/etc/vold.fstab:system/etc/vold.fstab \
+  device/samsung/galaxysplus/etc/asound.conf:system/etc/asound.conf \
+  device/samsung/galaxysplus/etc/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
+
+# Some kernel modules
+PRODUCT_COPY_FILES += \
+  device/samsung/galaxysplus/modules/tun.ko:system/lib/modules/tun.ko \
+  device/samsung/galaxysplus/modules/bthid.ko:system/lib/modules/bthid.ko \
+  device/samsung/galaxysplus/modules/qce.ko:system/lib/modules/qce.ko \
+  device/samsung/galaxysplus/modules/qcedev.ko:system/lib/modules/qcedev.ko \
+  device/samsung/galaxysplus/modules/librasdioif.ko:system/lib/modules/librasdioif.ko
 
 # Libraries
 PRODUCT_PACKAGES += \
@@ -120,16 +129,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
-
-# These are the hardware-specific configuration files
-PRODUCT_COPY_FILES += \
-	device/samsung/galaxysplus/etc/vold.fstab:system/etc/vold.fstab \
-	device/samsung/galaxysplus/etc/gps.conf:system/etc/gps.conf \
-	device/samsung/galaxysplus/etc/asound.conf:system/etc/asound.conf
-
-# Some kernel modules
-PRODUCT_COPY_FILES += \
-device/samsung/galaxysplus/modules/tun.ko:system/lib/modules/tun.ko
 
 # Screen density is actually considered a locale (since it is taken into account
 # the the build-time selection of resources). The product definitions including

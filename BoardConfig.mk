@@ -90,11 +90,11 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 WPA_SUPPLICANT_VERSION := VER_0_6_X
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 BOARD_WLAN_DEVICE := brcm4329
+WIFI_DRIVER_MODULE_NAME :=  "dhd"
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/dhd.ko"
 WIFI_DRIVER_FW_STA_PATH := "/system/lib/firmware/fw_bcm4329_apsta.bin"
-WIFI_DRIVER_FW_APS_PATH := "/system/lib/firmware/fw_bcm4329_apsta.bin"
-WIFI_DRIVER_MODULE_NAME :=  "dhd"
-WIFI_DRIVER_MODULE_ARG  :=  "firmware_path=/system/lib/firmware/fw_bcm4329.bin nvram_path=/system/lib/firmware/nvram_net.txt iface_name=eth0"
+WIFI_DRIVER_FW_AP_PATH := "/system/lib/firmware/fw_bcm4329_apsta.bin"
+WIFI_DRIVER_MODULE_ARG  := "firmware_path=/system/lib/firmware/fw_bcm4329.bin nvram_path=/system/lib/firmware/nvram_net.txt iface_name=eth0"
 
 # Vold
 BOARD_VOLD_MAX_PARTITIONS := 12
@@ -120,9 +120,9 @@ BOARD_CACHE_DEVICE := /dev/block/mmcblk0p16
 BOARD_CACHE_FILESYSTEM := ext4
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_RECOVERY_DEVICE := /dev/block/mmcblk0p13
-BOARD_SDCARD_SDEXT_DEVICE := /dev/block/mmcblk0p28
+BOARD_SDCARD_SDEXT_DEVICE := /dev/block/mmcblk1p1
 BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk0p28
-BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk0
+#BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk0
 BOARD_UMS_LUNFILE := /sys/devices/platform/usb_mass_storage/lun0/file
 
 # Video

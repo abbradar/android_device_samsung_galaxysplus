@@ -24,6 +24,7 @@ bin
 firmware
 lib
 lib/egl
+lib/hw
 etc/wifi
 cameradata
 media
@@ -34,27 +35,45 @@ for DIR in ${DIRS[@]}; do
 done
 
 FILES=(
+# misc
+bin/rmt_storage
+
 # gps
 lib/hw/gps.msm7k.so
-#etc/gps.conf
-#bin/gpsd
+etc/gps.conf
+bin/gpsd
+
+# bluetooth
+bin/btld
+bin/hciattach
+etc/init.qcom.bt.sh
 
 # radio
-bin/rild
+#bin/rild
 #lib/libril.so
 #lib/libsecril-client.so
-lib/libsec-ril.so
 #lib/modules/libra.ko
 #lib/modules/librasdioif.ko
 #lib/modules/WCN1314_rf.ko
 #lib/modules/WCN1314_rf_ftm.ko
+lib/libsec-ril.so
+bin/qmuxd
+# NPS-specific
+bin/drexe
+bin/npsmobex
+bin/cnd
+bin/netmgrd
+bin/ds_fmc_appd
 
 #wifi
-#etc/wifi/bcm4329_aps.bin
-#etc/wifi/bcm4329_mfg.bin
-#etc/wifi/bcm4329_sta.bin
-#etc/wifi/dhd.ko
-#etc/wifi/nvram_net.txt
+etc/wifi/bcm4329_aps.bin
+etc/wifi/bcm4329_mfg.bin
+etc/wifi/bcm4329_sta.bin
+etc/wifi/dhd.ko
+etc/wifi/nvram_net.txt
+bin/mfgloader
+bin/macloader
+etc/init.qcom.wifi.sh
 
 #video
 lib/libgsl.so
@@ -74,8 +93,8 @@ lib/libgemini.so
 # sensors
 #lib/libsensor_yamaha_test.so
 #lib/libsensorservice.so
-#bin/orientationd
-#bin/geomagneticd
+bin/orientationd
+bin/geomagneticd
 lib/hw/sensors.GT-I9001.so
 lib/hw/sensors.default.so
 
@@ -121,45 +140,41 @@ lib/libmmjpeg.so
 #cameradata/datapattern_420sp.yuv
 #cameradata/datapattern_front_420sp.yuv
 
-#tvout
+# tvout
 lib/libtvout.so
 lib/libtvout_jni.so
 lib/lib_tvoutengine.so
 lib/libtvoutservice.so
 bin/tvoutserver
-
-#some firmware
-firmware/CE147F00.bin
-firmware/CE147F01.bin
-firmware/CE147F02.bin
-firmware/CE147F03.bin
+bin/hdmid
 
 # charging mode
-bin/charging_mode
-bin/playlpm
-lib/libQmageDecoder.so
-media/battery_charging_10.qmg
-media/battery_charging_100.qmg
-media/battery_charging_15.qmg
-media/battery_charging_20.qmg
-media/battery_charging_25.qmg
-media/battery_charging_30.qmg
-media/battery_charging_35.qmg
-media/battery_charging_40.qmg
-media/battery_charging_45.qmg
-media/battery_charging_5.qmg
-media/battery_charging_50.qmg
-media/battery_charging_55.qmg
-media/battery_charging_60.qmg
-media/battery_charging_65.qmg
-media/battery_charging_70.qmg
-media/battery_charging_75.qmg
-media/battery_charging_80.qmg
-media/battery_charging_85.qmg
-media/battery_charging_90.qmg
-media/battery_charging_95.qmg
-media/chargingwarning.qmg
-media/Disconnected.qmg
+bin/battery_charging
+#bin/charging_mode
+#bin/playlpm
+#lib/libQmageDecoder.so
+#media/battery_charging_10.qmg
+#media/battery_charging_100.qmg
+#media/battery_charging_15.qmg
+#media/battery_charging_20.qmg
+#media/battery_charging_25.qmg
+#media/battery_charging_30.qmg
+#media/battery_charging_35.qmg
+#media/battery_charging_40.qmg
+#media/battery_charging_45.qmg
+#media/battery_charging_5.qmg
+#media/battery_charging_50.qmg
+#media/battery_charging_55.qmg
+#media/battery_charging_60.qmg
+#media/battery_charging_65.qmg
+#media/battery_charging_70.qmg
+#media/battery_charging_75.qmg
+#media/battery_charging_80.qmg
+#media/battery_charging_85.qmg
+#media/battery_charging_90.qmg
+#media/battery_charging_95.qmg
+#edia/chargingwarning.qmg
+#media/Disconnected.qmg
 )
 
 OBJECTS=(
@@ -170,7 +185,8 @@ chmod -R a+x ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin/*
 
 for i in ${FILES[@]}; do
     echo $i
-    adb pull system/$i ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/$i #2> /dev/null
+#    adb pull "system/$i" "../../../vendor/$MANUFACTURER/$DEVICE/proprietary/$i" #2> /dev/null
+    cp ~/android/i9001/original/mount/$i "../../../vendor/$MANUFACTURER/$DEVICE/proprietary/$i"
 done
 
 vendor_blobs=../../../vendor/$MANUFACTURER/$DEVICE/$DEVICE-vendor-blobs.mk

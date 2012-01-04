@@ -59,9 +59,9 @@ PRODUCT_PACKAGES += \
     
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES += \
-#  device/samsung/galaxysplus/etc/vold.fstab:system/etc/vold.fstab \
-  device/samsung/galaxysplus/etc/asound.conf:system/etc/asound.conf \
-  device/samsung/galaxysplus/etc/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
+  device/samsung/galaxysplus/etc/asound.conf:system/etc/asound.conf
+# DON'T EXPERIMENT WITH VOLD WITHOUT JTAG - IT CAN BRICK YOUR PHONE
+#  device/samsung/galaxysplus/etc/vold.fstab:system/etc/vold.fstab
 
 # Some kernel modules
 PRODUCT_COPY_FILES += \
@@ -74,13 +74,15 @@ PRODUCT_COPY_FILES += \
 # Libraries
 PRODUCT_PACKAGES += \
     lights.msm7x30 \
-    #gralloc.msm7x30 \
+    gralloc.msm7k \
     overlay.default \
     libcamera \
     librs_jni \
     libOmxCore \
     libOmxVenc \
-    libOmxVdec
+    libOmxVdec \
+    wpa_supplicant.conf \
+    dhcpcd.conf
 
 # Init files
 PRODUCT_COPY_FILES += \

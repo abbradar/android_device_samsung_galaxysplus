@@ -45,17 +45,12 @@ bin/gpsd
 
 # bluetooth
 bin/btld
-bin/hciattach
 etc/init.qcom.bt.sh
 
 # radio
-#bin/rild
+bin/rild
 #lib/libril.so
-#lib/libsecril-client.so
-#lib/modules/libra.ko
-#lib/modules/librasdioif.ko
-#lib/modules/WCN1314_rf.ko
-#lib/modules/WCN1314_rf_ftm.ko
+lib/libsecril-client.so
 lib/libsec-ril.so
 bin/qmuxd
 # NPS-specific
@@ -66,9 +61,6 @@ bin/netmgrd
 bin/ds_fmc_appd
 
 #wifi
-etc/wifi/bcm4329_aps.bin
-etc/wifi/bcm4329_mfg.bin
-etc/wifi/bcm4329_sta.bin
 etc/wifi/dhd.ko
 etc/wifi/nvram_net.txt
 bin/mfgloader
@@ -77,9 +69,7 @@ etc/init.qcom.wifi.sh
 
 #video
 lib/libgsl.so
-#lib/libgsdi_exp.so
-#lib/libgstk_exp.so
-lib/hw/gralloc.msm7k.so
+#lib/hw/gralloc.msm7k.so
 lib/egl/libEGL_adreno200.so
 lib/egl/libGLESv1_CM_adreno200.so
 lib/egl/libGLESv2_adreno200.so
@@ -87,8 +77,8 @@ lib/egl/libq3dtools_adreno200.so
 
 # audio
 lib/libaudioalsa.so
-lib/libaudioeq.so
-lib/libgemini.so
+#lib/libaudioeq.so
+#lib/libgemini.so
 
 # sensors
 #lib/libsensor_yamaha_test.so
@@ -96,7 +86,7 @@ lib/libgemini.so
 bin/orientationd
 bin/geomagneticd
 lib/hw/sensors.GT-I9001.so
-lib/hw/sensors.default.so
+#lib/hw/sensors.default.so
 
 # generic qcom libs
 #lib/libping_mdm.so

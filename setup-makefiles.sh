@@ -58,7 +58,7 @@ EOF
 
 #BOARD_GPS_LIBRARIES := libgps
 
-USE_CAMERA_STUB := false
+#USE_CAMERA_STUB := false
 
 BOARD_USES_GENERIC_AUDIO := false
 

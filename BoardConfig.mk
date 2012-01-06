@@ -33,24 +33,28 @@ TARGET_PROVIDES_INIT_TARGET_RC := true
 TARGET_BOARD_PLATFORM := msm7x30
 TARGET_BOOTLOADER_BOARD_NAME := qcom
 
-BOARD_USES_OVERLAY := true
+TARGET_SPECIFIC_HEADER_PATH := device/samsung/galaxyplus/include
 
 BOARD_MOBILEDATA_INTERFACE_NAME = "pdp0"
-
-# Camera
-USE_CAMERA_STUB := true
-BOARD_CAMERA_LIBRARIES := libcamera
-
-# Video Devices
-BOARD_V4L2_DEVICE := /dev/video20
-#BOARD_CAMERA_DEVICE := /dev/video0
-#BOARD_SECOND_CAMERA_DEVICE := /dev/video
 
 # Qcom
 BOARD_USES_QCOM_LIBRPC := true
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_LIBS := true
 BOARD_USES_QCOM_PMEM := true
+
+# Video
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
+BOARD_EGL_CFG := device/samsung/galaxysplus/etc/egl.cfg
+#TARGET_QCOM_HDMI_OUT := true
+
+# Camera
+USE_CAMERA_STUB := true
+
+# Video Devices
+BOARD_V4L2_DEVICE := /dev/video20
+#BOARD_CAMERA_DEVICE := /dev/video0
+#BOARD_SECOND_CAMERA_DEVICE := /dev/video
 
 # Misc
 JS_ENGINE := v8
@@ -61,7 +65,7 @@ BOARD_USES_GENERIC_AUDIO := true
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 
-# gps
+# GPS
 BOARD_USES_QCOM_GPS := true
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := qcom
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
@@ -79,11 +83,13 @@ BOARD_KERNEL_CMDLINE := console=null
 TARGET_PREBUILT_KERNEL := device/samsung/galaxysplus/kernel
 
 # Partition sizes
-# TODO: recheck
-BOARD_BOOTIMAGE_PARTITION_SIZE := 7864320
+BOARD_BOOTIMAGE_PARTITION_SIZE := 5242880
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 7864320
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 471859200
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 274464768
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 545259520
+# these looks like real (obtained from fdisk blocks * 1024), but don't attempt to flash /data without some checking first.
+# /system is checked, and we generate no image for /cache
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 1447034880
+BOARD_CACHEIMAGE_PARTITION_SIZE := 104857600
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Connectivity - Wi-Fi
@@ -97,7 +103,7 @@ WIFI_DRIVER_FW_AP_PATH := "/system/lib/firmware/fw_bcm4329_apsta.bin"
 WIFI_DRIVER_MODULE_ARG  := "firmware_path=/system/lib/firmware/fw_bcm4329.bin nvram_path=/system/lib/firmware/nvram_net.txt iface_name=eth0"
 
 # Vold
-BOARD_VOLD_MAX_PARTITIONS := 12
+BOARD_VOLD_MAX_PARTITIONS := 29
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
 # Recovery
@@ -106,7 +112,6 @@ BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/galaxysplus/recovery/re
 BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/galaxysplus/recovery/graphics.c
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
-BOARD_HAS_NO_SELECT_BUTTON := false
 
 # Partitions
 BOARD_HAS_SDCARD_INTERNAL := true
@@ -125,12 +130,9 @@ BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk0p28
 #BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk0
 BOARD_UMS_LUNFILE := /sys/devices/platform/usb_mass_storage/lun0/file
 
-# Video
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
-BOARD_EGL_CFG := device/samsung/galaxysplus/etc/egl.cfg
-
-# assert
+# Assert
 TARGET_OTA_ASSERT_DEVICE := GT-I9001
 
 # Use the non-open-source parts, if they're present
 -include vendor/samsung/galaxysplus/BoardConfigVendor.mk
+

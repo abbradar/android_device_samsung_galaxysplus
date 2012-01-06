@@ -59,7 +59,7 @@ PRODUCT_PACKAGES += \
     
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES += \
-  device/samsung/galaxysplus/etc/asound.conf:system/etc/asound.conf
+#  device/samsung/galaxysplus/etc/asound.conf:system/etc/asound.conf
 # DON'T EXPERIMENT WITH VOLD WITHOUT JTAG - IT CAN BRICK YOUR PHONE
 #  device/samsung/galaxysplus/etc/vold.fstab:system/etc/vold.fstab
 
@@ -74,9 +74,11 @@ PRODUCT_COPY_FILES += \
 # Libraries
 PRODUCT_PACKAGES += \
     lights.msm7x30 \
-    gralloc.msm7k \
+    gps.qcom \
+    librs_jni \
+    gralloc.msm7x30 \
     overlay.default \
-    libcamera \
+    libs3cjpeg \
     librs_jni \
     libOmxCore \
     libOmxVenc \
@@ -119,9 +121,8 @@ PRODUCT_COPY_FILES += \
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=eth0 \
-       wifi.supplicant_scan_interval=20 \
-       ro.telephony.ril_class=samsung \
-       mobiledata.interfaces=pdp0,eth0,gprs,ppp0 \
+       wifi.supplicant_scan_interval=15 \
+       rild.libargs=-d /dev/ttyS0 \
        dalvik.vm.heapsize=32m
 
 # The OpenGL ES API level that is natively supported by this device.

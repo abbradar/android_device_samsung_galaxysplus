@@ -2,17 +2,27 @@ on boot
   mount debugfs /sys/kernel/debug /sys/kernel/debug
 
 on fs
+# protection from possible brick
+# vold uses device nodes in /sys/platform/, so it can damage bootloader anyway
+  chmod 444 /dev/block/mmcblk0
+  chmod 444 /dev/block/mmcblk0p1
+  chmod 444 /dev/block/mmcblk0p2
+  chmod 444 /dev/block/mmcblk0p3
+  chmod 444 /dev/block/mmcblk0p4
+  chmod 444 /dev/block/mmcblk0p5
+  chmod 444 /dev/block/mmcblk0p6
+  chmod 444 /dev/block/mmcblk0p7
+# mounting fs
   mount ext4 /dev/block/mmcblk0p15 /system wait nodev noatime nodiratime noauto_da_alloc ro
   mount ext4 /dev/block/mmcblk0p17 /data wait nosuid nodev noatime nodiratime noauto_da_alloc
   mount ext4 /dev/block/mmcblk0p16 /cache wait nosuid nodev noatime nodiratime noauto_da_alloc
   mkdir /persist 0755 system system
   mount ext4 /dev/block/mmcblk0p12 /persist wait nosuid nodev noatime nodiratime noauto_da_alloc
-  mount vfat /dev/block/mmcblk0p28 /mnt/sdcard wait nosuid nodev noatime nodiratime
-  mount vfat /dev/block/mmcblk1p1 /mnt/sd-ext nosuid nodev noatime nodiratime
-  # We chown/chmod /efs because mount is run as root + defaults
   mkdir /efs 0775 radio radio
   mount ext4 /dev/block/mmcblk0p27 /efs nodev noatime nodiratime wait
-  chown radio radio /efs
+# FIXME: vold is not configured now
+  mount vfat /dev/block/mmcblk0p28 /mnt/sdcard wait nosuid nodev noatime nodiratime
+  mount vfat /dev/block/mmcblk1p1 /mnt/sd-ext nosuid nodev noatime nodiratime
 
 on boot-pause
 # from init.qcom.rc

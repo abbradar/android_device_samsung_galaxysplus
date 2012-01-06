@@ -53,10 +53,15 @@ bin/rild
 lib/libsecril-client.so
 lib/libsec-ril.so
 bin/qmuxd
+lib/libdiag.so
 # NPS-specific
 bin/drexe
 bin/npsmobex
 bin/cnd
+lib/libdsutils.so
+lib/libidl.so
+lib/libqmi.so
+lib/libnetmgr.so
 bin/netmgrd
 bin/ds_fmc_appd
 
@@ -86,7 +91,7 @@ lib/libaudioalsa.so
 bin/orientationd
 bin/geomagneticd
 lib/hw/sensors.GT-I9001.so
-#lib/hw/sensors.default.so
+lib/hw/sensors.default.so
 
 # generic qcom libs
 #lib/libping_mdm.so
@@ -122,9 +127,9 @@ lib/hw/sensors.GT-I9001.so
 #lib/libs3cjpeg.so
 #lib/libseccamera.so
 #lib/libcamera.so
-lib/liboemcamera.so
-lib/libmmipl.so
-lib/libmmjpeg.so
+#lib/liboemcamera.so
+#lib/libmmipl.so
+#lib/libmmjpeg.so
 #lib/libseccameraadaptor.so
 #lib/libsecjpegencoder.so
 #cameradata/datapattern_420sp.yuv
@@ -163,12 +168,13 @@ bin/battery_charging
 #media/battery_charging_85.qmg
 #media/battery_charging_90.qmg
 #media/battery_charging_95.qmg
-#edia/chargingwarning.qmg
+#media/chargingwarning.qmg
 #media/Disconnected.qmg
 )
 
 OBJECTS=(
 lib/libaudioalsa.so
+lib/libcamera.so
 )
 
 chmod -R a+x ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin/*

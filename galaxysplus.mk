@@ -59,6 +59,7 @@ PRODUCT_PACKAGES += \
     
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES += \
+  device/samsung/galaxysplus/etc/gps.conf:system/etc/gps.conf
 #  device/samsung/galaxysplus/etc/asound.conf:system/etc/asound.conf
 # DON'T EXPERIMENT WITH VOLD WITHOUT JTAG - IT CAN BRICK YOUR PHONE
 #  device/samsung/galaxysplus/etc/vold.fstab:system/etc/vold.fstab
@@ -74,17 +75,14 @@ PRODUCT_COPY_FILES += \
 # Libraries
 PRODUCT_PACKAGES += \
     lights.msm7x30 \
-    gps.qcom \
     librs_jni \
     gralloc.msm7x30 \
-    overlay.default \
-    libs3cjpeg \
     librs_jni \
     libOmxCore \
-    libOmxVenc \
-    libOmxVdec \
     wpa_supplicant.conf \
-    dhcpcd.conf
+    dhcpcd.conf \
+    brcm_patchram_plus \
+    screencap \
 
 # Init files
 PRODUCT_COPY_FILES += \
@@ -104,7 +102,7 @@ PRODUCT_PACKAGES += \
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
 	frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-	frameworks/base/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
+	frameworks/base/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
 	frameworks/base/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
 	frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
         frameworks/base/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
@@ -112,23 +110,11 @@ PRODUCT_COPY_FILES += \
 	frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
 	frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
 	frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
+	frameworks/base/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml \
+	frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
 	frameworks/base/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
 	frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
 	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
-
-# These are the hardware-specific settings that are stored in system properties.
-# Note that the only such settings should be the ones that are too low-level to
-# be reachable from resources or other mechanisms.
-PRODUCT_PROPERTY_OVERRIDES += \
-       wifi.interface=eth0 \
-       wifi.supplicant_scan_interval=15 \
-       rild.libargs=-d /dev/ttyS0 \
-       dalvik.vm.heapsize=32m
-
-# The OpenGL ES API level that is natively supported by this device.
-# This is a 16.16 fixed point number
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=131072
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise

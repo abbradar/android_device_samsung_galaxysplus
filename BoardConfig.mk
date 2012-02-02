@@ -35,8 +35,6 @@ TARGET_BOOTLOADER_BOARD_NAME := qcom
 
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/galaxyplus/include
 
-BOARD_MOBILEDATA_INTERFACE_NAME = "pdp0"
-
 # Qcom
 BOARD_USES_QCOM_LIBRPC := true
 BOARD_USES_QCOM_HARDWARE := true
@@ -46,34 +44,51 @@ BOARD_USES_QCOM_PMEM := true
 # Video
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 BOARD_EGL_CFG := device/samsung/galaxysplus/etc/egl.cfg
-#TARGET_QCOM_HDMI_OUT := true
+#TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
+#COPYBIT_MSM7K := true
+TARGET_QCOM_HDMI_OUT := true
+BOARD_USE_SCREENCAP := true
+BOARD_USE_FRAMEBUFFER_ALPHA_CHANNEL := true
 
 # Camera
 USE_CAMERA_STUB := true
-
-# Video Devices
-BOARD_V4L2_DEVICE := /dev/video20
-#BOARD_CAMERA_DEVICE := /dev/video0
+#USE_CAMERA_STUB := false
+#BOARD_USE_FROYO_LIBCAMERA := true
+#BOARD_V4L2_DEVICE := /dev/video20
+BOARD_CAMERA_DEVICE := /dev/video0
 #BOARD_SECOND_CAMERA_DEVICE := /dev/video
 
 # Misc
+WITH_JIT := true
+ENABLE_JSC_JIT := true
 JS_ENGINE := v8
+
+# Radio
+BOARD_MOBILEDATA_INTERFACE_NAME:= "pdp0"
 BOARD_USES_LIBSECRIL_STUB := true
+
+# Audio
+#TARGET_PROVIDES_LIBAUDIO := true
 BOARD_USES_GENERIC_AUDIO := true
+BOARD_PREBUILT_LIBAUDIO := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
+BT_ALT_STACK := true
+BRCM_BT_USE_BTL_IF := true
+BRCM_BTL_INCLUDE_A2DP := true
 
 # GPS
+BOARD_GPS_LIBRARIES := libloc_api
 BOARD_USES_QCOM_GPS := true
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := qcom
-BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
+BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
 
 # FM Radio
 BOARD_HAVE_FM_RADIO := true
 BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
-BOARD_FM_DEVICE := si4709
+BOARD_FM_DEVICE := bcm4325
 
 # Kernel
 BOARD_NAND_PAGE_SIZE := 4096 -s 128
@@ -95,12 +110,12 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 # Connectivity - Wi-Fi
 WPA_SUPPLICANT_VERSION := VER_0_6_X
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
-BOARD_WLAN_DEVICE := brcm4329
+BOARD_WLAN_DEVICE := bcm4329
 WIFI_DRIVER_MODULE_NAME :=  "dhd"
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/dhd.ko"
-WIFI_DRIVER_FW_STA_PATH := "/system/lib/firmware/fw_bcm4329_apsta.bin"
-WIFI_DRIVER_FW_AP_PATH := "/system/lib/firmware/fw_bcm4329_apsta.bin"
-WIFI_DRIVER_MODULE_ARG  := "firmware_path=/system/lib/firmware/fw_bcm4329.bin nvram_path=/system/lib/firmware/nvram_net.txt iface_name=eth0"
+WIFI_DRIVER_FW_STA_PATH := "/system/etc/firmware/bcm4329_sta.bin"
+WIFI_DRIVER_FW_AP_PATH := "/system/etc/firmware/bcm4329_aps.bin"
+WIFI_DRIVER_MODULE_ARG  := "firmware_path=/system/etc/firmware/bcm4329_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt iface_name=eth0"
 
 # Vold
 BOARD_VOLD_MAX_PARTITIONS := 29
@@ -128,6 +143,7 @@ BOARD_RECOVERY_DEVICE := /dev/block/mmcblk0p13
 BOARD_SDCARD_SDEXT_DEVICE := /dev/block/mmcblk1p1
 BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk0p28
 #BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk0
+BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 BOARD_UMS_LUNFILE := /sys/devices/platform/usb_mass_storage/lun0/file
 
 # Assert

@@ -35,6 +35,10 @@ on post-fs
 
 # from init.rc
 
+# Backward compatibility
+# needed for some proprietary binaries, aargh
+  symlink /system/etc /etc
+
   # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
   # We chown/chmod /persist again so because mount is run as root + defaults
   chown system system /persist
@@ -208,23 +212,13 @@ on post-fs
   chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
   chown bluetooth bluetooth /sys/class/rfkill/rfkill1/type
 
-  chown root root /system/bin/brcm_dutMode
-  chmod 6777 /system/bin/brcm_dutMode
-
   # for VT
   chown radio radio /dev/ttyCSD0
   chmod 0660 /dev/ttyCSD0
-  
-  # jhlee 2010.12.23
-  setprop service.brcm.bt.srv_active 0
-  setprop service.brcm.bt.hcid_active  0
-  setprop service.brcm.fm.activation  0
 
   # for Jig
   chmod 0664 /sys/devices/virtual/jig/jig/jig
   
-  # ihryu 2010.07.19
-  setprop ro.rfkilldisabled 0
   #class_start default
 # +++++++++++++++++++++++++++++++++++++++++++
 
@@ -281,9 +275,8 @@ on post-fs
   mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
   mkdir /data/misc/dhcp 0770 dhcp dhcp
   chown dhcp dhcp /data/misc/dhcp
-  symlink /persist/qcom_wlan_nv.bin /etc/firmware/wlan/qcom_wlan_nv.bin
-  symlink /data/hostapd/qcom_cfg.ini /etc/firmware/wlan/qcom_cfg.ini
-  setprop wifi.interface eth0
+  symlink /persist/qcom_wlan_nv.bin /system/etc/firmware/wlan/qcom_wlan_nv.bin
+  symlink /data/hostapd/qcom_cfg.ini /system/etc/firmware/wlan/qcom_cfg.ini
 
    # Create directories for wiper services
   mkdir /data/wpstiles/ 0777 shell
@@ -291,7 +284,7 @@ on post-fs
 
    # Create directories for gpsone_daemon services
   mkdir /data/gpsone_d 0770 gpsone_d qcom_oncrpc
-  mkdir /etc/gpsone_d 0770 gpsone_d qcom_oncrpc
+  mkdir /system/etc/gpsone_d 0770 gpsone_d qcom_oncrpc
 
    # Create directory from IMS services
   mkdir /data/shared 0777
@@ -323,11 +316,11 @@ on boot
 # from init.rc
 
 # gyroscope sensor
-#   write /sys/class/input/input4/position 1
-#   write /sys/class/input/input5/position 7
+#  write /sys/class/input/input4/position 1
+#  write /sys/class/input/input5/position 7
   write /sys/class/input/input6/threshold 1
   write /sys/class/input/input6/distortion " 15 15 15"
-#   write /sys/class/input/input5/filter_noise 400 400 500
+#  write /sys/class/input/input5/filter_noise 400 400 500
 
 # Assign TCP buffer thresholds to be ceiling value of technology maximums
 # Increased technology maximums should be reflected here.
@@ -336,9 +329,9 @@ on boot
 
 # from init.qcom.rc
 
-  insmod /lib/modules/bthid.ko
+  insmod /system/lib/modules/bthid.ko
 # included into custom kernel, but let it be
-  insmod /lib/modules/sec_param.ko
+  insmod /system/lib/modules/sec_param.ko
 
   #increase dirty_writeback_interval
   write /proc/sys/vm/dirty_writeback_centisecs 500
@@ -366,59 +359,54 @@ on property:persist.service.usb.setting=4
 	write /sys/devices/platform/android_usb/UsbMenuSel 4
 
 #for WiFi MFG(TestMode)
-service mfgloader /system/bin/mfgloader
-  disabled
-  oneshot
 
-service wlandutservice /system/bin/wlandutservice
-  disabled
-  oneshot
+#service mfgloader /system/bin/mfgloader
+#  disabled
+#  oneshot
 
-service macloader /system/bin/macloader
-  oneshot
+#service macloader /system/bin/macloader
+#  oneshot
+
 # end of wifi
 
-#service DR-daemon /system/bin/drexe
-#  user root
-#  group system radio inet net_raw
-
-service mobex-daemon /system/bin/npsmobex
-	user system
-	group system inet
+#service mobex-daemon /system/bin/npsmobex
+#	user system
+#	group system inet
 
 service gps-daemon /system/bin/gpsd
   user system
   group system inet
 
-service btld /system/bin/logwrapper /system/bin/btld -hb 3000000 -hp /dev/ttyHS0 -lpm 1
-  # init.rc does not yet support applying capabilities, so run as root and
-  # let btld drop uid to bluetooth with the right linux capabilities
-  group bluetooth net_bt_admin
-  disabled
-  oneshot
+#service btld /system/bin/logwrapper /system/bin/btld -hb 3000000 -hp /dev/ttyHS0 -lpm 1
+#  # init.rc does not yet support applying capabilities, so run as root and
+#  # let btld drop uid to bluetooth with the right linux capabilities
+#  group bluetooth net_bt_admin
+#  disabled
+#  oneshot
 
 # start btld if soft_onoff is enabled
-on property:service.brcm.bt.soft_onoff=1
-  start btld
+#on property:service.brcm.bt.soft_onoff=1
+#  start btld
 
 # stop btld if soft_onoff is disabled
-on property:service.brcm.bt.soft_onoff=0
-  stop btld
+#on property:service.brcm.bt.soft_onoff=0
+#  stop btld
 
 service hciattach /system/bin/brcm_patchram_plus --enable_hci \
-    --baudrate 115200 --patchram /etc/bluetooth/BCM4329B1_002.002.023.0746.0000_SS_S1-plus-38_4MHz-TEST-ONLY.hcd /dev/ttyHS0
+    --baudrate 115200 --patchram /system/lib/firmware/BCM4329B1_002.002.023.0746.0000_SS_S1-plus-38_4MHz-TEST-ONLY.hcd /dev/ttyHS0
     user bluetooth
     group bluetooth net_bt_admin
     disabled
     oneshot
+
 # magnetic sensor yamaha
 service orientationd /system/bin/orientationd
-	user compass
-	group input
-	
+  user compass
+  group input
+
 service geomagneticd /system/bin/geomagneticd
-	user compass
-	group system input
+  user compass
+  group system input
 
 service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf -dd
   user root
@@ -448,14 +436,14 @@ on property:init.svc.wpa_supplicant=stopped
 on property:init.svc.bluetoothd=running
   write /sys/devices/virtual/bluetooth/hci0/idle_timeout 7000
 
-service cnd /system/bin/cnd
-  socket cnd stream 660 root radio
-  user radio
-  group system radio
+#service cnd /system/bin/cnd
+#  socket cnd stream 660 root radio
+#  user radio
+#  group system radio
 
 service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p10 /dev/block/mmcblk0p11
-	user root
-	group system
+  user root
+  group system
   disabled
 
 on property:ro.emmc=1
@@ -465,19 +453,14 @@ on property:ro.emmc=1
   chown system system /sys/devices/platform/rs300100a7.65536/sync_sts
   start rmt_storage
 
-service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
-  user bluetooth
-  group qcom_oncrpc bluetooth net_bt_admin
-  disabled
-  oneshot
-
+# netmgr not supported on specific target
 service netmgrd /system/bin/netmgrd
+  disabled
   user radio
   group system radio
 
-on property:ro.use_data_netmgrd=false
-  # netmgr not supported on specific target
-  stop netmgrd
+on property:ro.use_data_netmgrd=true
+  start netmgrd
 
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
 # but only if ro.data.large_tcp_window_size property is set.
@@ -491,15 +474,6 @@ on property:crypto.driver.load=1
 on property:crypto.driver.load=0
   exec /system/bin/rmmod qcedev.ko
   exec /system/bin/rmmod qce.ko
-    
-on property:dev.bootdone=1
-  start qcom-post-boot
-  start qcom-wifi
-    
-service qcom-wifi /system/bin/sh /system/etc/init.qcom.wifi.sh
-  user root
-  disabled
-  oneshot
 
 service hdmid /system/bin/hdmid
   socket hdmid stream 0660 root system graphics
@@ -510,33 +484,27 @@ service hdmid /system/bin/hdmid
 on property:ro.hdmi.enable=true
   start hdmid
 
-#service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
-#  user root
-#  group root
-#  oneshot
-#  disabled
-
-service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
-  group radio
-  disabled
+service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
+  user root
+  group root
   oneshot
+  disabled
 
-on property:persist.data.ds_fmc_app.mode=1
-  start ds_fmc_appd
-e
+#service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
+#  group radio
+#  disabled
+#  oneshot
+
+#on property:persist.data.ds_fmc_app.mode=1
+#  start ds_fmc_appd
+
 on property:ro.data.large_tcp_window_size=true
   # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
-  write /proc/sys/net/ipv4/tcp_adv_win_scale  1
+  write /proc/sys/net/ipv4/tcp_adv_win_scale 1
 
-service ftp /system/bin/sdptool add --channel=20 FTP
-  user bluetooth
-  group bluetooth net_bt_admin
-  disabled
-  oneshot
-
-service map /system/bin/sdptool add --channel=16 MAS
-  user bluetooth
-  group bluetooth net_bt_admin
-  disabled
-  oneshot
+# bugreport is triggered by holding down volume down, volume up and power
+service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
+    disabled
+    oneshot
+    keycodes 114 115 116
 

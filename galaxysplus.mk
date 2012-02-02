@@ -59,7 +59,7 @@ PRODUCT_PACKAGES += \
     
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES += \
-  device/samsung/galaxysplus/etc/gps.conf:system/etc/gps.conf
+  device/samsung/galaxysplus/etc/gps.conf:system/etc/gps.conf \
 #  device/samsung/galaxysplus/etc/asound.conf:system/etc/asound.conf
 # DON'T EXPERIMENT WITH VOLD WITHOUT JTAG - IT CAN BRICK YOUR PHONE
 #  device/samsung/galaxysplus/etc/vold.fstab:system/etc/vold.fstab
@@ -88,6 +88,18 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     device/samsung/galaxysplus/init.qcom.rc:root/init.qcom.rc \
     device/samsung/galaxysplus/ueventd.qcom.rc:root/ueventd.qcom.rc
+
+# These are the hardware-specific settings that are stored in system properties.
+# Note that the only such settings should be the ones that are too low-level to
+# be reachable from resources or other mechanisms.
+PRODUCT_PROPERTY_OVERRIDES += \
+        ro.ril.hsxpa=1 \
+        ro.ril.gprsclass=10 \
+        rild.libpath=/system/lib/libsec-ril.so \
+        rild.libargs=-d /dev/smd0 \
+        wifi.interface=eth0 \
+        ro.opengles.version=131072 \
+        ro.config.ehrpd=true        
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector

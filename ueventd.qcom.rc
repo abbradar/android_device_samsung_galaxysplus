@@ -22,11 +22,11 @@
 /dev/msm_pcm_lp_dec       0660   system     audio
 /dev/gemini0              0660   system     system
 
-#permissions for video
+# permissions for video
 /dev/msm_vidc_reg         0660  system       audio
 /dev/msm_vidc_dec         0660  system       audio
 /dev/msm_vidc_enc         0660  system       audio
-#permissions for audio
+# permissions for audio
 /dev/msm_amrnb            0660  system       audio
 /dev/msm_amrwb            0660  system       audio
 /dev/msm_aac              0660  system       audio
@@ -43,3 +43,7 @@
 /dev/msm_a2dp_in          0640  system       audio
 /dev/msm_amrnb_in         0640  system       audio
 /dev/tspdrv               0660  shell        shell
+
+# permissions for radio
+/dev/ttyHS0               0660  bluetooth    bluetooth
+

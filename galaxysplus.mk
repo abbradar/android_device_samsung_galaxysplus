@@ -59,7 +59,7 @@ PRODUCT_PACKAGES += \
     
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES += \
-  device/samsung/galaxysplus/etc/gps.conf:system/etc/gps.conf \
+#  device/samsung/galaxysplus/etc/gps.conf:system/etc/gps.conf \
 #  device/samsung/galaxysplus/etc/asound.conf:system/etc/asound.conf
 # DON'T EXPERIMENT WITH VOLD WITHOUT JTAG - IT CAN BRICK YOUR PHONE
 #  device/samsung/galaxysplus/etc/vold.fstab:system/etc/vold.fstab
@@ -76,13 +76,16 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     lights.msm7x30 \
     librs_jni \
-    gralloc.msm7x30 \
+#    gralloc.msm7x30 \
+#    overlay.default \
     librs_jni \
     libOmxCore \
     wpa_supplicant.conf \
     dhcpcd.conf \
     brcm_patchram_plus \
     screencap \
+#    fw_bcm4329.bin \
+#    fw_bcm4329_apsta.bin \
 
 # Init files
 PRODUCT_COPY_FILES += \
@@ -99,7 +102,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
         rild.libargs=-d /dev/smd0 \
         wifi.interface=eth0 \
         ro.opengles.version=131072 \
-        ro.config.ehrpd=true        
+        ro.config.ehrpd=true
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector

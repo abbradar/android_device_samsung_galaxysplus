@@ -26,6 +26,7 @@
 /dev/msm_vidc_reg         0660  system       audio
 /dev/msm_vidc_dec         0660  system       audio
 /dev/msm_vidc_enc         0660  system       audio
+
 # permissions for audio
 /dev/msm_amrnb            0660  system       audio
 /dev/msm_amrwb            0660  system       audio
@@ -44,6 +45,16 @@
 /dev/msm_amrnb_in         0640  system       audio
 /dev/tspdrv               0660  shell        shell
 
-# permissions for radio
+# permissions for bluetooth
 /dev/ttyHS0               0660  bluetooth    bluetooth
+/dev/ttySMD0              0660  bluetooth    bluetooth
+/dev/uinput               0660  bluetooth    bluetooth
+
+# permissions for radio
+/dev/ttyCSD0              0660 radio        radio
+/dev/ttyGS0               0660 system       system
+/dev/dun                  0660 system       system
+
+# permissions for FM
+/dev/fmradio              0660 system       system
 

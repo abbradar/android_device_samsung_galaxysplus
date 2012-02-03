@@ -19,7 +19,13 @@ on fs
   mkdir /persist 0755 system system
   mount ext4 /dev/block/mmcblk0p12 /persist wait nosuid nodev noatime nodiratime noauto_da_alloc
   mkdir /efs 0775 radio radio
+  # We chown/chmod /persist again so because mount is run as root + defaults
+  chown system system /persist
+  chmod 0771 /persist
   mount ext4 /dev/block/mmcblk0p27 /efs nodev noatime nodiratime wait
+  #efs
+  chown system system /efs
+  chmod 0771 /efs
 # FIXME: vold is not configured now
   mount vfat /dev/block/mmcblk0p28 /mnt/sdcard wait nosuid nodev noatime nodiratime
   mount vfat /dev/block/mmcblk1p1 /mnt/sd-ext nosuid nodev noatime nodiratime
@@ -27,7 +33,7 @@ on fs
 on boot-pause
 # from init.qcom.rc
 
-  exec system/bin/battery_charging
+#  exec system/bin/battery_charging
 
 on post-fs
 # debug (read-write)
@@ -40,9 +46,6 @@ on post-fs
   symlink /system/etc /etc
 
   # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
-  # We chown/chmod /persist again so because mount is run as root + defaults
-  chown system system /persist
-  chmod 0771 /persist
   # Chown polling nodes as needed from UI running on system server
   chown system system /sys/devices/platform/msm_sdcc.1/polling
   chown system system /sys/devices/platform/msm_sdcc.2/polling
@@ -54,8 +57,6 @@ on post-fs
   chmod 0644 /sys/devices/platform/msm_sdcc.4/polling
   
   #efs
-  chown system system /efs
-  chmod 0771 /efs
   mkdir /efs/.files 0775
   
 # create data/gps for GPS demon
@@ -93,7 +94,6 @@ on post-fs
   chown system input /sys/class/input/input6/distortion
   chown system input /sys/class/input/input6/shape
   chown compass input /sys/class/input/input6/offsets
-
 
 # orientation
   chown system input /sys/class/input/input7/enable
@@ -198,23 +198,13 @@ on post-fs
   chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
 
   chown bluetooth bluetooth ro.bt.bdaddr_path
-  chown bluetooth bluetooth /dev/uinput
-  chmod 0660 /dev/uinput
-  chown bluetooth bluetooth /dev/ttyHS0
-  chmod 0660 /dev/ttyHS0
-  chown bluetooth bluetooth /dev/ttySMD0
-  chmod 0660 /dev/ttySMD0
 
-  chmod 0770 /sys/class/rfkill/rfkill0/state
-  chmod 0770 /sys/class/rfkill/rfkill1/state
+  chmod 0660 /sys/class/rfkill/rfkill0/state
+  chmod 0660 /sys/class/rfkill/rfkill1/state
   chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
   chown bluetooth bluetooth /sys/class/rfkill/rfkill1/state
   chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
   chown bluetooth bluetooth /sys/class/rfkill/rfkill1/type
-
-  # for VT
-  chown radio radio /dev/ttyCSD0
-  chmod 0660 /dev/ttyCSD0
 
   # for Jig
   chmod 0664 /sys/devices/virtual/jig/jig/jig
@@ -238,20 +228,9 @@ on post-fs
   chown radio radio /proc/LinuStoreIII/ril_prop 
   chmod 0664 /proc/LinuStoreIII/ril_prop
 
-  chown system system /dev/fmradio
-  chmod 0660 /dev/fmradio
-
 # Force Power Down
 	chmod 0660 /sys/class/sec/pm/power_down
 	chown root system /sys/class/sec/pm/power_down
-	
-# TV out
-	chown system system /dev/pmem_hdmi
-#	chown root graphics /dev/graphics/fb1
-
-# for datarouter
-  chown system system /dev/ttyGS0
-  chown system system /dev/dun
   
 # from init.qcom.rc
 
@@ -285,7 +264,6 @@ on post-fs
 
 # Create directory from IMS services
   mkdir /data/shared 0777
-
 
   #Set SUID bit for usbhub
   chmod 4755 /system/bin/usbhub
@@ -381,16 +359,16 @@ service gps-daemon /system/bin/gpsd
 #  disabled
 #  oneshot
 
-# start btld if soft_onoff is enabled
+## start btld if soft_onoff is enabled
 #on property:service.brcm.bt.soft_onoff=1
 #  start btld
 
-# stop btld if soft_onoff is disabled
+## stop btld if soft_onoff is disabled
 #on property:service.brcm.bt.soft_onoff=0
 #  stop btld
 
-service hciattach /system/bin/brcm_patchram_plus --enable_hci \
-    --baudrate 115200 --patchram /system/lib/firmware/BCM4329B1_002.002.023.0746.0000_SS_S1-plus-38_4MHz-TEST-ONLY.hcd /dev/ttyHS0
+service hciattach /system/bin/logwrapper /system/bin/brcm_patchram_plus --enable_hci --enable_lpm \
+    --baudrate 3000000 --patchram /system/etc/firmware/bcm4329.hcd /dev/ttyHS0
     user bluetooth
     group bluetooth net_bt_admin
     disabled
@@ -419,7 +397,7 @@ service qmuxd /system/bin/qmuxd
   user radio
   group system radio inet
 
-service dhcpcd_eth0 /system/bin/dhcpcd -BKL eth0
+service dhcpcd_eth0 /system/bin/dhcpcd -ABKL eth0
     disabled
     oneshot
 
@@ -428,9 +406,6 @@ service iprenew_eth0 /system/bin/dhcpcd -n eth0
     oneshot
 
 # from init.qcom.rc
-
-on property:init.svc.wpa_supplicant=stopped
-  stop dhcpcd
 
 on property:init.svc.bluetoothd=running
   write /sys/devices/virtual/bluetooth/hci0/idle_timeout 7000
@@ -452,14 +427,14 @@ on property:ro.emmc=1
   chown system system /sys/devices/platform/rs300100a7.65536/sync_sts
   start rmt_storage
 
-# netmgr not supported on specific target
-service netmgrd /system/bin/netmgrd
-  disabled
-  user radio
-  group system radio
+## netmgr not supported on specific target
+#service netmgrd /system/bin/netmgrd
+#  disabled
+#  user radio
+#  group system radio
 
-on property:ro.use_data_netmgrd=true
-  start netmgrd
+#on property:ro.use_data_netmgrd=true
+#  start netmgrd
 
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
 # but only if ro.data.large_tcp_window_size property is set.
@@ -483,11 +458,10 @@ service hdmid /system/bin/hdmid
 on property:ro.hdmi.enable=true
   start hdmid
 
-service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
-  user root
-  group root
-  oneshot
-  disabled
+#service hostapd /system/bin/hostapd /data/hostapd/hostapd.conf
+#  group wifi inet
+#  oneshot
+#  disabled
 
 #service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
 #  group radio
@@ -506,4 +480,3 @@ service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
     disabled
     oneshot
     keycodes 114 115 116
-

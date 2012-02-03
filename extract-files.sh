@@ -58,17 +58,17 @@ bin/rild
 lib/libsecril-client.so
 lib/libsec-ril.so
 bin/qmuxd
-lib/libdiag.so
+#lib/libdiag.so
 # NPS-specific
 #bin/drexe
 #bin/npsmobex
 #bin/cnd
-lib/libdsutils.so
-lib/libidl.so
-lib/libqmi.so
+#lib/libdsutils.so
+#lib/libidl.so
+#lib/libqmi.so
 #lib/libqmiservices.so
-lib/libnetmgr.so
-bin/netmgrd
+#lib/libnetmgr.so
+#bin/netmgrd
 #bin/ds_fmc_appd
 
 # omx libs
@@ -136,21 +136,22 @@ bin/hdmid
 
 # audio
 lib/libaudioalsa.so
+#lib/libaudio.so
 #lib/libaudioeq.so
 #lib/liba2dp.so
 
 # sensors
 lib/libsensor_yamaha_test.so
-lib/libsensorservice.so
+#lib/libsensorservice.so
 bin/orientationd
 bin/geomagneticd
 
 ## camera
 lib/libActionShot.so
 lib/libarccamera.so
-lib/libcamera_client.so
+#lib/libcamera_client.so
 lib/libcamerafirmwarejni.so
-lib/libcameraservice.so
+#lib/libcameraservice.so
 lib/libCaMotion.so
 lib/libcaps.so
 lib/libPanoraMax1.so
@@ -214,7 +215,7 @@ usr/keychars/ariesve_keypad_qwerty.kcm.bin
 
 # keylayouts
 usr/keylayout/7k_handset.kl
-usr/keylayout/AVRCP.kl
+#usr/keylayout/AVRCP.kl
 usr/keylayout/ariesve_handset.kl
 usr/keylayout/ariesve_keypad.kl
 usr/keylayout/fluid-keypad.kl
@@ -240,7 +241,7 @@ lib/hw/gralloc.msm7k.so
 )
 
 FILES_TO=(
-lib/firmware/BCM4329B1_002.002.023.0746.0000_SS_S1-plus-38_4MHz-TEST-ONLY.hcd
+lib/firmware/bcm4329.hcd
 lib/modules/dhd.ko
 etc/firmware/bcm4329_aps.bin
 etc/firmware/bcm4329_sta.bin

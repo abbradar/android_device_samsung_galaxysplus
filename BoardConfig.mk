@@ -54,9 +54,9 @@ BOARD_USE_FRAMEBUFFER_ALPHA_CHANNEL := true
 USE_CAMERA_STUB := true
 #USE_CAMERA_STUB := false
 #BOARD_USE_FROYO_LIBCAMERA := true
-#BOARD_V4L2_DEVICE := /dev/video20
-BOARD_CAMERA_DEVICE := /dev/video0
-#BOARD_SECOND_CAMERA_DEVICE := /dev/video
+#BOARD_V4L2_DEVICE := /dev/video0
+BOARD_CAMERA_DEVICE := /dev/video20
+#BOARD_SECOND_CAMERA_DEVICE := /dev/video0
 
 # Misc
 WITH_JIT := true
@@ -78,6 +78,8 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 BT_ALT_STACK := true
 BRCM_BT_USE_BTL_IF := true
 BRCM_BTL_INCLUDE_A2DP := true
+# workaround for our chip
+BOARD_HAVE_BLUETOOTH_BCM_SEMC := true
 
 # GPS
 BOARD_GPS_LIBRARIES := libloc_api

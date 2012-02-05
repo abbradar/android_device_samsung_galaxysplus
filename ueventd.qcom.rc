@@ -58,3 +58,12 @@
 # permissions for FM
 /dev/fmradio              0660 system       system
 
+# partial protection from brick
+/dev/block/mmcblk0        0400 root         root
+/dev/block/mmcblk0p1      0400 root         root
+/dev/block/mmcblk0p2      0400 root         root
+/dev/block/mmcblk0p3      0400 root         root
+/dev/block/mmcblk0p4      0400 root         root
+/dev/block/mmcblk0p5      0400 root         root
+/dev/block/mmcblk0p6      0400 root         root
+/dev/block/mmcblk0p7      0400 root         root

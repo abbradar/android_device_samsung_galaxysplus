@@ -80,17 +80,21 @@ PRODUCT_PACKAGES += \
 #    overlay.default \
     librs_jni \
     libOmxCore \
+    libOmxVenc \
+    libOmxVdec \
     wpa_supplicant.conf \
     dhcpcd.conf \
     brcm_patchram_plus \
     screencap \
+    com.android.future.usb.accessory
 #    fw_bcm4329.bin \
 #    fw_bcm4329_apsta.bin \
 
 # Init files
 PRODUCT_COPY_FILES += \
     device/samsung/galaxysplus/init.qcom.rc:root/init.qcom.rc \
-    device/samsung/galaxysplus/ueventd.qcom.rc:root/ueventd.qcom.rc
+    device/samsung/galaxysplus/ueventd.qcom.rc:root/ueventd.qcom.rc \
+    device/samsung/galaxysplus/lpm.rc:root/lpm.rc
 
 # These are the hardware-specific settings that are stored in system properties.
 # Note that the only such settings should be the ones that are too low-level to
@@ -114,21 +118,22 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
 	SamsungServiceMode
 
+## Live wallpapers
+#PRODUCT_PACKAGES += \
+#    LiveWallpapers \
+#    LiveWallpapersPicker
+
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
 	frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+	frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
 	frameworks/base/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
 	frameworks/base/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
-	frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-        frameworks/base/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
-	frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
 	frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-	frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
-	frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-	frameworks/base/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml \
-	frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
 	frameworks/base/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
-	frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
+	frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
+	frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
+	frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
 	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
 
 # we have enough storage space to hold precise GC data

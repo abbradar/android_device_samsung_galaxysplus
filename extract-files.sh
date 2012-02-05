@@ -146,7 +146,7 @@ lib/libsensor_yamaha_test.so
 bin/orientationd
 bin/geomagneticd
 
-## camera
+# camera
 lib/libActionShot.so
 lib/libarccamera.so
 #lib/libcamera_client.so
@@ -158,7 +158,7 @@ lib/libPanoraMax1.so
 lib/libPlusMe.so
 lib/libs3cjpeg.so
 lib/libseccamera.so
-lib/libcamera.so
+#lib/libcamera.so
 lib/liboemcamera.so
 lib/libmmipl.so
 lib/libmmjpeg.so
@@ -225,7 +225,7 @@ usr/keylayout/sec_jack.kl
 
 OBJECTS=(
 lib/libaudioalsa.so
-lib/libcamera.so
+#lib/libcamera.so
 )
 
 FILES_FROM=(

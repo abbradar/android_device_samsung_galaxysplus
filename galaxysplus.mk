@@ -93,7 +93,7 @@ PRODUCT_PACKAGES += \
 # Init files
 PRODUCT_COPY_FILES += \
     device/samsung/galaxysplus/init.qcom.rc:root/init.qcom.rc \
-    device/samsung/galaxysplus/ueventd.qcom.rc:root/ueventd.qcom.rc \
+    device/samsung/galaxysplus/ueventd.gt-i9001.rc:root/ueventd.gt-i9001.rc \
     device/samsung/galaxysplus/lpm.rc:root/lpm.rc
 
 # These are the hardware-specific settings that are stored in system properties.

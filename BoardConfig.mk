@@ -51,7 +51,7 @@ BOARD_USE_SCREENCAP := true
 BOARD_USE_FRAMEBUFFER_ALPHA_CHANNEL := true
 
 # Camera
-USE_CAMERA_STUB := true
+#USE_CAMERA_STUB := true
 #USE_CAMERA_STUB := false
 #BOARD_USE_FROYO_LIBCAMERA := true
 #BOARD_V4L2_DEVICE := /dev/video0
@@ -157,4 +157,3 @@ TARGET_OTA_ASSERT_DEVICE := GT-I9001
 
 # Use the non-open-source parts, if they're present
 -include vendor/samsung/galaxysplus/BoardConfigVendor.mk
-

@@ -46,7 +46,6 @@
 /dev/tspdrv               0660  shell        shell
 
 # permissions for bluetooth
-/dev/ttyHS0               0660  bluetooth    bluetooth
 /dev/ttySMD0              0660  bluetooth    bluetooth
 /dev/uinput               0660  bluetooth    bluetooth
 
@@ -67,3 +66,4 @@
 /dev/block/mmcblk0p5      0400 root         root
 /dev/block/mmcblk0p6      0400 root         root
 /dev/block/mmcblk0p7      0400 root         root
+

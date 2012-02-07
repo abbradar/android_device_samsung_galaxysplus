@@ -53,10 +53,6 @@ on post-fs
   mkdir /data/gps 771 gps system
   chown gps system /data/gps
   
-# permissions for MTP device node
-  chmod 0660 /dev/usb_mtp_gadget
-  chown system system /dev/usb_mtp_gadget
-  
 # accelerometer
   chown system input /sys/class/input/input4/enable
   chown system input /sys/class/input/input4/delay
@@ -108,15 +104,11 @@ on post-fs
   chown system input /sys/class/input/input9/testmode
 
 # gyroscope sensor
-#    chown system input /sys/class/input/input10/enable
-#    chown system input /sys/class/input/input10/delay
-#    chown system input /sys/class/input/input10/wake
-#    chown system input /sys/class/input/input10/data
-#    chown system input /sys/class/input/input10/status
-
-#geomagnetic factory test
-  chown system system /dev/i2c-12
-  chmod 0660 /dev/i2c-12
+#  chown system input /sys/class/input/input10/enable
+#  chown system input /sys/class/input/input10/delay
+#  chown system input /sys/class/input/input10/wake
+#  chown system input /sys/class/input/input10/data
+#  chown system input /sys/class/input/input10/status
 
   chown root radio /proc/cmdline
   chown system system /sys/module/g_android/parameters/product_id
@@ -225,6 +217,9 @@ on post-fs
 # from init.qcom.rc
 
 # wi-fi
+  mkdir /data/misc/wifi/sockets 0770 wifi wifi
+  mkdir /data/misc/dhcp 0770 dhcp dhcp
+  
   symlink /persist/qcom_wlan_nv.bin /system/etc/firmware/wlan/qcom_wlan_nv.bin
   symlink /data/hostapd/qcom_cfg.ini /system/etc/firmware/wlan/qcom_cfg.ini
 
@@ -357,7 +352,7 @@ service geomagneticd /system/bin/geomagneticd
   user compass
   group system input
 
-service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf
+service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf -dd
   socket wpa_eth0 dgram 660 wifi wifi
   disabled
   oneshot
@@ -367,9 +362,9 @@ service tvout /system/bin/tvoutserver
    user system
    group system
 
-service qmuxd /system/bin/qmuxd
-  user radio
-  group system radio inet
+#service qmuxd /system/bin/qmuxd
+#  user radio
+#  group system radio inet
 
 service dhcpcd_eth0 /system/bin/dhcpcd -ABKL eth0
     disabled
@@ -416,10 +411,12 @@ on property:ro.data.large_tcp_window_size=true
   write /proc/sys/net/ipv4/tcp_adv_win_scale 1
 
 on property:crypto.driver.load=1
+  insmod /system/lib/modules/qcrypto.so
   insmod /system/lib/modules/qce.ko
   insmod /system/lib/modules/qcedev.ko
 
 on property:crypto.driver.load=0
+  exec /system/bin/rmmod qcrypto.ko
   exec /system/bin/rmmod qcedev.ko
   exec /system/bin/rmmod qce.ko
 

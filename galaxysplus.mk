@@ -68,9 +68,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
   device/samsung/galaxysplus/modules/tun.ko:system/lib/modules/tun.ko \
   device/samsung/galaxysplus/modules/bthid.ko:system/lib/modules/bthid.ko \
+  device/samsung/galaxysplus/modules/qcrypto.ko:system/lib/modules/qcrypto.ko \
   device/samsung/galaxysplus/modules/qce.ko:system/lib/modules/qce.ko \
   device/samsung/galaxysplus/modules/qcedev.ko:system/lib/modules/qcedev.ko \
-  device/samsung/galaxysplus/modules/librasdioif.ko:system/lib/modules/librasdioif.ko
+#  device/samsung/galaxysplus/modules/librasdioif.ko:system/lib/modules/librasdioif.ko
 
 # Libraries
 PRODUCT_PACKAGES += \
@@ -100,8 +101,6 @@ PRODUCT_COPY_FILES += \
 # Note that the only such settings should be the ones that are too low-level to
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
-        ro.ril.hsxpa=1 \
-        ro.ril.gprsclass=10 \
         rild.libpath=/system/lib/libsec-ril.so \
         rild.libargs=-d /dev/smd0 \
         wifi.interface=eth0 \

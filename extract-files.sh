@@ -58,7 +58,7 @@ bin/rild
 lib/libsecril-client.so
 lib/libsec-ril.so
 bin/qmuxd
-#lib/libdiag.so
+lib/libdiag.so
 # NPS-specific
 #bin/drexe
 #bin/npsmobex
@@ -242,7 +242,7 @@ lib/hw/gralloc.msm7k.so
 )
 
 FILES_TO=(
-lib/firmware/bcm4329.hcd
+etc/firmware/bcm4329.hcd
 lib/modules/dhd.ko
 etc/firmware/bcm4329_aps.bin
 etc/firmware/bcm4329_sta.bin

@@ -53,10 +53,6 @@ PRODUCT_COPY_FILES += \
     device/samsung/galaxysplus/splash/ARIESVE.rle:recovery/ARIESVE.rle \
     device/samsung/galaxysplus/splash/charging.rle:recovery/charging.rle
 
-PRODUCT_PACKAGES += \
-    fw_bcm4329.bin \
-    fw_bcm4329_apsta.bin
-    
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES += \
 #  device/samsung/galaxysplus/etc/gps.conf:system/etc/gps.conf \
@@ -86,7 +82,6 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf \
     dhcpcd.conf \
     brcm_patchram_plus \
-    screencap \
     com.android.future.usb.accessory
 #    fw_bcm4329.bin \
 #    fw_bcm4329_apsta.bin \
@@ -102,16 +97,12 @@ PRODUCT_COPY_FILES += \
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
         rild.libpath=/system/lib/libsec-ril.so \
-        rild.libargs=-d /dev/smd0 \
+        rild.libargs="-d /dev/ttyS0" \
         wifi.interface=eth0 \
         ro.opengles.version=131072 \
-        ro.config.ehrpd=true
-
-# enable Google-specific location features,
-# like NetworkLocationProvider and LocationCollector
-PRODUCT_PROPERTY_OVERRIDES += \
-        ro.com.google.locationfeatures=1 \
-        ro.com.google.networklocation=1
+        ro.config.ehrpd=true \
+        ro.telephony.ril_class=samsung \
+        mobiledata.interfaces=pdp0,gprs,ppp0 \
 
 # Service Mode Secret Code
 PRODUCT_PACKAGES += \

@@ -46,7 +46,7 @@ etc/media_profiles.xml
 
 # gps
 #etc/gps.conf
-bin/gpsd
+#bin/gpsd
 
 # bluetooth
 #bin/btld
@@ -57,8 +57,8 @@ bin/rild
 #lib/libril.so
 lib/libsecril-client.so
 lib/libsec-ril.so
-bin/qmuxd
-lib/libdiag.so
+#bin/qmuxd
+#lib/libdiag.so
 # NPS-specific
 #bin/drexe
 #bin/npsmobex

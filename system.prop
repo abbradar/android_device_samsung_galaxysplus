@@ -66,4 +66,3 @@ ro.emmc.sdcard.partition=16
 wifi.supplicant_scan_interval=15
 #ro.secdevenc=true
 dalvik.vm.dexopt-flags=m=y
-

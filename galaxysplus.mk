@@ -97,7 +97,7 @@ PRODUCT_COPY_FILES += \
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
         rild.libpath=/system/lib/libsec-ril.so \
-        rild.libargs="-d /dev/ttyS0" \
+        rild.libargs=-d/dev/ttyS0 \
         wifi.interface=eth0 \
         ro.opengles.version=131072 \
         ro.config.ehrpd=true \

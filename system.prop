@@ -1,68 +1,50 @@
 #
-# system.prop for galaxysplus
+# system.prop for ancora
 #
+rild.libpath=/system/lib/libsec-ril.so
+rild.libargs=-d /dev/smd0
 
-# from init.rc
-#service.brcm.bt.srv_active=0
-#service.brcm.bt.hcid_active=0
-#service.brcm.fm.activation=0
-#ro.rfkilldisabled=0
+ro.ril.hsxpa=1
+ro.ril.gprsclass=10
+ro.telephony.ril.v3=signalstrength
+ro.telephony.ril_class=SamsungHCRIL
 
-# from build.prop
-
-#
-# system.prop for surf
-#
-debug.sf.hw=1
-dalvik.vm.heapsize=64m
+# Density in DPI of the LCD of this board. This is used to scale the UI
+# appropriately. If this property is not defined, the default value is 160 dpi.
 ro.sf.lcd_density=240
-#ro.dev.dmm=1
-#dev.dmm.dpd.trigger_delay=30
 
-#
-# system props for the cne module
-#
-#persist.cne.UseCne=vendor
-#persist.cne.bat.range.low.med=30
-#persist.cne.bat.range.med.high=60
-#persist.cne.loc.policy.op=/system/etc/OperatorPolicy.xml
-#persist.cne.loc.policy.user=/system/etc/UserPolicy.xml
-#persist.cne.bwbased.rat.sel=false
-#persist.cne.snsr.based.rat.mgt=false
-#persist.cne.bat.based.rat.mgt=false
-#persist.cne.rat.acq.time.out=30000
-#persist.cne.rat.acq.retry.tout=0
+# Wifi interface device and interval for access point scanning.
+wifi.interface=wlan0
+wifi.supplicant_scan_interval=45
 
-#
-#lpa.decode=false
-#ro.hdmi.enable=true
+ro.tether.denied=false
 
-#
-# system props for the data modules
-#
-#ro.use_data_netmgrd=true
+# Enable Google-specific location features,
+# like NetworkLocationProvider and LocationCollector.
+ro.com.google.locationfeatures=1
 
-#
-# system props for SD card emulation of emmc partition
-#
-ro.emmc.sdcard.partition=16
+# Disable fs check on boot by default.
+sys.checkfs.fat=false
 
-#
-# system props for the MM modules
-#
-#media.stagefright.enable-player=true
-#media.stagefright.enable-meta=false
-#media.stagefright.enable-scan=false
-#media.stagefright.enable-http=true
-#media.stagefright.enable-rtsp=false
+# The OpenGL ES API level that is natively supported by this device.
+# This is a 16.16 fixed point number.
+ro.opengles.version=131072
 
-# Samsung USB default mode
-#persist.service.usb.setting=0
+# Performance settings.
+dalvik.vm.dexopt-data-only=1
+dalvik.vm.execution-mode=int:jit
+ro.zram.default=0
 
-#
-# ADDITIONAL_BUILD_PROPERTIES
-#
+# QCOM
+debug.sf.hw=1
+com.qc.hardware=true
+debug.composition.type=mdp
+debug.qctwa.statusbar=1
+debug.qctwa.preservebuf=1
+debug.enabletr=false
 
-wifi.supplicant_scan_interval=15
-#ro.secdevenc=true
-dalvik.vm.dexopt-flags=m=y
+# System prop for capping scroll velocity
+ro.max.fling_velocity=4000
+
+# Set default USB interface
+persist.sys.usb.config=mass_storage

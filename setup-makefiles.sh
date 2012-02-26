@@ -19,7 +19,7 @@ MANUFACTURER=samsung
 
 mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE
 
-(cat << EOF) | sed s/__DEVICE__/$DEVICE/g | sed s/__MANUFACTURER__/$MANUFACTURER/g | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/$MANUFACTURER/$DEVICE/$DEVICE-vendor.mk
+(cat << EOF) | sed s/__DEVICE__/$DEVICE/g | sed s/__MANUFACTURER__/$MANUFACTURER/g | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/$MANUFACTURER/$DEVICE/device-vendor.mk
 # Copyright (C) 2010 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,7 +37,7 @@ mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE
 # Pick up overlay for features that depend on non-open-source files
 DEVICE_PACKAGE_OVERLAYS += vendor/__MANUFACTURER__/__DEVICE__/overlay
 
-\$(call inherit-product, vendor/__MANUFACTURER__/__DEVICE__/__DEVICE__-vendor-blobs.mk)
+\$(call inherit-product, vendor/__MANUFACTURER__/__DEVICE__/device-vendor-blobs.mk)
 EOF
 
 
@@ -56,10 +56,6 @@ EOF
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#BOARD_GPS_LIBRARIES := libgps
-
 USE_CAMERA_STUB := false
-
-BOARD_USES_LIBSECRIL_STUB := false
 
 EOF

@@ -1,4 +1,4 @@
-# Copyright (C) 2009 The Android Open Source Project
+# Copyright (C) 2012 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,28 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#
-# This file is the build configuration for a full Android
-# build for crespo hardware. This cleanly combines a set of
-# device-specific aspects (drivers) with a device-agnostic
-# product configuration (apps).
-#
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+$(call inherit-product, $(LOCAL_PATH)/galaxysplus.mk)
 
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-# This is where we'd set a backup provider if we had one
-#$(call inherit-product, device/sample/products/backup_overlay.mk)
-$(call inherit-product, device/samsung/galaxysplus/galaxysplus.mk)
+# The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full.mk)
 
-# Galaxy S uses high-density artwork where available
-PRODUCT_LOCALES += hdpi
-
-# Discard inherited values and use our own instead.
+# Set those variables here to overwrite the inherited values.
 PRODUCT_NAME := full_galaxysplus
 PRODUCT_DEVICE := galaxysplus
+PRODUCT_BRAND := Samsung
+PRODUCT_MANUFACTURER := Samsung
 PRODUCT_MODEL := GT-I9001
-PRODUCT_BRAND := samsung
-PRODUCT_MANUFACTURER := samsung
-

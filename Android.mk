@@ -1,3 +1,3 @@
 ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),qcom)
-    include $(all-subdir-makefiles)
+include $(call first-makefiles-under,$(call my-dir))
 endif

@@ -27,6 +27,7 @@ lib/hw
 media
 etc
 etc/firmware
+firmware
 cameradata
 )
 
@@ -57,6 +58,8 @@ lib/liboverlay.so
 
 # sensors
 lib/libsensor_yamaha_test.so
+bin/orientationd
+bin/geomagneticd
 
 # tvout
 #lib/libtvout.so
@@ -82,10 +85,11 @@ lib/liboemcamera.so
 lib/libmmipl.so
 lib/libmmjpeg.so
 lib/libgemini.so
-# TODO: remove in CM9
+# TODO: clean
 lib/libcameraservice.so
 lib/libcamera_client.so
 lib/libcamerafirmwarejni.so
+# TODO: not present in Ancora
 lib/libseccameraadaptor.so
 lib/libCaMotion.so
 lib/libPanoraMax1.so
@@ -133,6 +137,11 @@ etc/firmware/vidc_720p_mp4_enc_mc.fw
 etc/firmware/vidc_720p_vc1_dec_mc.fw
 cameradata/datapattern_420sp.yuv
 cameradata/datapattern_front_420sp.yuv
+# not present for Ancora
+firmware/CE147F00.bin
+firmware/CE147F01.bin
+firmware/CE147F02.bin
+firmware/CE147F03.bin
 
 # keychars
 #usr/keychars/ariesve_keypad_numeric.kcm.bin

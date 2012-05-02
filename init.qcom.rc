@@ -102,13 +102,6 @@ on boot
   chown system input /sys/class/input/input9/testmode
 
 # gyroscope sensor
-#  chown system input /sys/class/input/input10/enable
-#  chown system input /sys/class/input/input10/delay
-#  chown system input /sys/class/input/input10/wake
-#  chown system input /sys/class/input/input10/data
-#  chown system input /sys/class/input/input10/status
-
-# gyroscope sensor
   write /sys/class/input/input6/threshold 1
   write /sys/class/input/input6/distortion " 15 15 15"
 
@@ -239,28 +232,18 @@ on post-fs
     setprop vold.post_fs_data_done 1
 
 service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
-    -Dwext -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf
+    -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf
     class main
-    socket wpa_wlan0 dgram 0660 wifi wifi
+    socket wpa_eth0 dgram 0660 wifi wifi
     disabled
     oneshot
 
-service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
-    class main
-    disabled
-    oneshot
-
-service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
+service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
     class main
     disabled
     oneshot
 
-service iprenew_wlan0 /system/bin/dhcpcd -n
-    class main
-    disabled
-    oneshot
-
-service iprenew_bnep0 /system/bin/dhcpcd -n
+service iprenew_eth0 /system/bin/dhcpcd -n
     class main
     disabled
     oneshot
@@ -272,16 +255,6 @@ service hciattach /system/bin/brcm_patchram_plus --enable_hci \
     group bluetooth net_bt_admin
     disabled
     oneshot
-
-# TODO: uncomment for CM9
-#service hciattach /system/bin/brcm_patchram_plus --enable_hci --no2bytes --enable_lpm \
-#    --tosleep 50000 --baudrate 3000000 --use_baudrate_for_download --i2s=1,1,0,1 \
-#    --patchram /vendor/firmware/bcm4329.hcd /dev/ttyHS0
-#    class main
-#    user bluetooth
-#    group bluetooth net_bt_admin
-#    disabled
-#    oneshot
 
 service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p10 /dev/block/mmcblk0p11
     class main
@@ -317,4 +290,3 @@ service orientationd /system/bin/orientationd
 service geomagneticd /system/bin/geomagneticd
     user compass
     group system input
-

@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# TODO: update for CM9
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 # Kernel
@@ -64,7 +63,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/wifi/nvram_net.txt:system/vendor/firmware/nvram_net.txt \
     $(LOCAL_PATH)/recovery/fix_reboot.sh:recovery/root/sbin/fix_reboot.sh \
     $(LOCAL_PATH)/init.qcom.usb.rc:root/init.qcom.usb.rc \
-    #$(LOCAL_PATH)/etc/vold.fstab:system/etc/vold.fstab \
+    $(LOCAL_PATH)/etc/vold.fstab:system/etc/vold.fstab \
 
 # Input device calibration files
 PRODUCT_COPY_FILES += \
@@ -82,35 +81,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/modules/bthid.ko:root/lib/modules/bthid.ko \
     $(LOCAL_PATH)/modules/dhd.ko:root/lib/modules/dhd.ko
-
-# TODO: uncomment for CM9
-# Audio profiles
-#PRODUCT_COPY_FILES += \
-#    $(LOCAL_PATH)/etc/audio/codec/FMRadioEar.ini:system/etc/audio/codec/FMRadioEar.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/FMRadioSpk.ini:system/etc/audio/codec/FMRadioSpk.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/MusicEar.ini:system/etc/audio/codec/MusicEar.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/MusicSpk.ini:system/etc/audio/codec/MusicSpk.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/RecHeadSetMic.ini:system/etc/audio/codec/RecHeadSetMic.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/RecMainMic.ini:system/etc/audio/codec/RecMainMic.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/RecSubMic.ini:system/etc/audio/codec/RecSubMic.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/RingtoneEar.ini:system/etc/audio/codec/RingtoneEar.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/RingtoneSpk.ini:system/etc/audio/codec/RingtoneSpk.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/VoiceCall3pEar.ini:system/etc/audio/codec/VoiceCall3pEar.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/VoiceCall4pEar.ini:system/etc/audio/codec/VoiceCall4pEar.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/VoiceCallBT.ini:system/etc/audio/codec/VoiceCallBT.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/VoiceCallRcv.ini:system/etc/audio/codec/VoiceCallRcv.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/VoiceCallSpk.ini:system/etc/audio/codec/VoiceCallSpk.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/VoiceRecHeadSetMic.ini:system/etc/audio/codec/VoiceRecHeadSetMic.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/VoiceRecMainMic.ini:system/etc/audio/codec/VoiceRecMainMic.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/VoipCall3pEar.ini:system/etc/audio/codec/VoipCall3pEar.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/VoipCall4pEar.ini:system/etc/audio/codec/VoipCall4pEar.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/VoipCallRcv.ini:system/etc/audio/codec/VoipCallRcv.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/VoipCallSpk.ini:system/etc/audio/codec/VoipCallSpk.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/VtCall3pEar.ini:system/etc/audio/codec/VtCall3pEar.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/VtCall4pEar.ini:system/etc/audio/codec/VtCall4pEar.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/VtCallBT.ini:system/etc/audio/codec/VtCallBT.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/VtCallRcv.ini:system/etc/audio/codec/VtCallRcv.ini \
-#    $(LOCAL_PATH)/etc/audio/codec/VtCallSpk.ini:system/etc/audio/codec/VtCallSpk.ini
 
 PRODUCT_PACKAGES += \
     librs_jni \
@@ -131,7 +101,6 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libstagefrighthw \
     com.android.future.usb.accessory \
-#    gps.ancora \
 
 PRODUCT_PACKAGES += \
     make_ext4fs \
@@ -148,9 +117,6 @@ PRODUCT_COPY_FILES += \
 
 # We have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
-
-# TODO: uncomment for CM9
-#$(call inherit-product, frameworks/base/build/phone-hdpi-dalvik-heap.mk)
 
 $(call inherit-product-if-exists, vendor/samsung/galaxysplus/device-vendor.mk)
 

@@ -71,6 +71,8 @@ bin/geomagneticd
 
 # audio
 lib/libaudioalsa.so
+lib/libaudio.so
+# abandoned ^_^
 
 # smth from W
 lib/libC2D2.so

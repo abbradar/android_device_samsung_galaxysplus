@@ -71,11 +71,9 @@ bin/hdmid
 # audio
 lib/libaudioalsa.so
 
-# smth from W
+# camera
 lib/libC2D2.so
 lib/libOpenVG.so
-
-# camera
 lib/libarccamera.so
 lib/libs3cjpeg.so
 lib/libcamera.so

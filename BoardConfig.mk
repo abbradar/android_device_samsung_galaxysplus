@@ -1,4 +1,4 @@
-# Copyright (C) 2007 The Android Open Source Project
+# Copyright (C) 2012 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,9 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# BoardConfig.mk
 #
-# Product-specific compile-time definitions.
+# This file sets variables that control the way modules are built
+# thorughout the system. It should not be used to conditionally
+# disable makefiles (the proper mechanism to control what gets
+# included in a build is to use PRODUCT_PACKAGES in a product
+# definition file).
 #
 
 # Platform and CPU
@@ -42,7 +45,7 @@ TARGET_SPECIFIC_HEADER_PATH := device/samsung/galaxyplus/include
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_LIBS := true
 BOARD_USES_QCOM_LIBRPC := true
-#COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
+COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_ROTATOR_KERNEL_FORMATS
 
 # Misc
 WITH_JIT := true
@@ -94,6 +97,7 @@ BOARD_USE_SKIA_LCDTEXT := true
 TARGET_USES_C2D_COMPOSITION := false
 TARGET_USES_OVERLAY := true
 TARGET_USES_SF_BYPASS := false
+TARGET_HAVE_BYPASS := false
 TARGET_GRALLOC_USES_ASHMEM := false
 TARGET_USES_GENLOCK := false
 TARGET_FORCE_CPU_UPLOAD := true
@@ -111,11 +115,11 @@ BOARD_USE_CAF_LIBCAMERA := true
 BOARD_USES_QCOM_GPS := true
 BOARD_VENDOR_QCOM_AMSS_VERSION := 6225
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := msm7k
-BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
+BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
 
 # Storage
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
-BOARD_VOLD_MAX_PARTITIONS := 29
+BOARD_VOLD_MAX_PARTITIONS := 28
 BOARD_MTP_DEVICE := "/dev/usb_mtp_gadget"
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 BOARD_UMS_LUNFILE := /sys/devices/platform/usb_mass_storage/lun0/file
@@ -142,7 +146,8 @@ BOARD_NAND_PAGE_SIZE := 4096 -s 128
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_BASE := 0x00400000
 BOARD_KERNEL_CMDLINE := console=null
-TARGET_PREBUILT_KERNEL := device/samsung/galaxysplus/kernel
+TARGET_PREBUILT_KERNEL := device/samsung/galaxysplus/prebuilt/kernel
+TARGET_SPECIFIC_HEADER_PATH := device/samsung/galaxysplus/include
 
 # Partition sizes
 # these looks like real (obtained from fdisk blocks * 1024), but don't attempt to flash /data without some checking first.
@@ -152,7 +157,7 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 7864320
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 545259520
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 1447034880
 BOARD_CACHEIMAGE_PARTITION_SIZE := 104857600
-BOARD_FLASH_BLOCK_SIZE := 131072
+BOARD_FLASH_BLOCK_SIZE := 4096
 
 BOARD_USES_MMCUTILS := true
 

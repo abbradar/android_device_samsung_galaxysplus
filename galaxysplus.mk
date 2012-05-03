@@ -24,7 +24,7 @@ else
 endif
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel \
+    $(LOCAL_KERNEL):prebuilt/kernel \
 
 # Boot screen
 PRODUCT_COPY_FILES += \
@@ -75,10 +75,14 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/quantom-touchscreen.kl:system/usr/keylayout/quantom-touchscreen.kl \
     $(LOCAL_PATH)/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
 
+# Misc
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/prebuilt/get_macaddrs:system/bin/get_macaddrs \
+
 # Modules
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/modules/bthid.ko:root/lib/modules/bthid.ko \
-    $(LOCAL_PATH)/modules/dhd.ko:root/lib/modules/dhd.ko \
+    $(LOCAL_PATH)/prebuilt/modules/bthid.ko:root/lib/modules/bthid.ko \
+    $(LOCAL_PATH)/prebuilt/modules/dhd.ko:root/lib/modules/dhd.ko \
 
 # HAL modules and libraries
 PRODUCT_PACKAGES += \
@@ -98,7 +102,7 @@ PRODUCT_PACKAGES += \
 
 # Audio/video codecs
 PRODUCT_PACKAGES += \
-    libQcomUI \
+    libmm-omxcore \
     libOmxCore \
     libOmxVenc \
     libOmxVdec \
@@ -109,6 +113,8 @@ PRODUCT_PACKAGES += com.android.future.usb.accessory
 
 # Output images
 PRODUCT_PACKAGES += \
+	e2fsck \
+	badblocks \
     make_ext4fs \
     setup_fs \
 

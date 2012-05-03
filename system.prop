@@ -48,3 +48,4 @@ ro.max.fling_velocity=4000
 
 # Set default USB interface
 persist.sys.usb.config=mass_storage
+ro.vold.switchablepair=/mnt/sdcard,/mnt/emmc

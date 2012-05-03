@@ -42,7 +42,6 @@ bin/rmt_storage
 # radio
 lib/libsecril-client.so
 lib/libsec-ril.so
-# TODO: remove in CM9
 bin/rild
 
 #video
@@ -53,7 +52,7 @@ lib/egl/libGLESv2_adreno200.so
 lib/egl/libq3dtools_adreno200.so
 etc/firmware/yamato_pfp.fw
 etc/firmware/yamato_pm4.fw
-# TODO: remove for CM9
+lib/hw/overlay.default.so
 lib/liboverlay.so
 
 # sensors
@@ -62,22 +61,19 @@ bin/orientationd
 bin/geomagneticd
 
 # tvout
-#lib/libtvout.so
-#lib/libtvout_jni.so
-#lib/lib_tvoutengine.so
-#lib/libtvoutservice.so
-#bin/tvoutserver
-#bin/hdmid
+lib/libtvout.so
+lib/libtvout_jni.so
+lib/lib_tvoutengine.so
+lib/libtvoutservice.so
+bin/tvoutserver
+bin/hdmid
 
 # audio
 lib/libaudioalsa.so
-lib/libaudio.so
-# abandoned ^_^
 
 # smth from W
 lib/libC2D2.so
 lib/libOpenVG.so
-#lib/libakm.so
 
 # camera
 lib/libarccamera.so
@@ -87,11 +83,9 @@ lib/liboemcamera.so
 lib/libmmipl.so
 lib/libmmjpeg.so
 lib/libgemini.so
-# TODO: clean
 lib/libcameraservice.so
 lib/libcamera_client.so
 lib/libcamerafirmwarejni.so
-# TODO: not present in Ancora
 lib/libseccameraadaptor.so
 lib/libCaMotion.so
 lib/libPanoraMax1.so
@@ -139,24 +133,10 @@ etc/firmware/vidc_720p_mp4_enc_mc.fw
 etc/firmware/vidc_720p_vc1_dec_mc.fw
 cameradata/datapattern_420sp.yuv
 cameradata/datapattern_front_420sp.yuv
-# not present for Ancora
 firmware/CE147F00.bin
 firmware/CE147F01.bin
 firmware/CE147F02.bin
 firmware/CE147F03.bin
-
-# keychars
-#usr/keychars/ariesve_keypad_numeric.kcm.bin
-#usr/keychars/ariesve_keypad_qwerty.kcm.bin
-
-# keylayouts
-#usr/keylayout/7k_handset.kl
-#usr/keylayout/AVRCP.kl
-#usr/keylayout/ariesve_handset.kl
-#usr/keylayout/ariesve_keypad.kl
-#usr/keylayout/fluid-keypad.kl
-#usr/keylayout/msm_tma300_ts.kl
-#usr/keylayout/sec_jack.kl
 )
 
 OBJECTS=(
@@ -166,16 +146,14 @@ lib/libcamera.so
 
 FILES_FROM=(
 bin/BCM4329B1_002.002.023.0746.0000_SS_S1-plus-38_4MHz-TEST-ONLY.hcd
-#etc/wifi/dhd.ko
-#lib/hw/gps.msm7k.so
+lib/hw/gps.msm7k.so
 lib/hw/sensors.GT-I9001.so
 lib/hw/gralloc.msm7k.so
 )
 
 FILES_TO=(
 vendor/firmware/bcm4329.hcd
-#lib/modules/dhd.ko
-#lib/hw/gps.msm7x30.so
+lib/hw/gps.msm7x30.so
 lib/hw/sensors.msm7x30.so
 lib/hw/gralloc.msm7x30.so
 )

@@ -18,13 +18,13 @@ PRODUCT_LOCALES += hdpi
 
 # Kernel
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-    LOCAL_KERNEL := $(LOCAL_PATH)/kernel
+    LOCAL_KERNEL := $(LOCAL_PATH)/prebuilt/kernel
 else
     LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):prebuilt/kernel \
+    $(LOCAL_KERNEL):kernel \
 
 # Boot screen
 PRODUCT_COPY_FILES += \
